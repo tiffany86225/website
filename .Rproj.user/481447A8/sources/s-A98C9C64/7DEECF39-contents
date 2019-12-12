@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://tiffany86225.netlify.com/"
 languageCode = "en-US"
 title = "Tiffany Tung"
 # Enable comments by entering your Disqus shortname
@@ -23,10 +23,7 @@ theme = "hugo-sustain"
   Github        = "tiffany86225"
   Email         = "tiffany86225@gmail.com"
   Twitter       = "tiffany86225"
-  LinkedIn      = "username"
-  Stackoverflow = "username"
-  Medium        = "username"
-  Telegram      = "username"
+
 
 ## Main Menu
 [[menu.main]]
