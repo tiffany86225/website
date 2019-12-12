@@ -3,3 +3,154 @@ pwd
 ]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git i nit
 Initialized empty Git repository in /Users/Tiff/Desktop/website/.git/
 ]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git a dd .\[K
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git c ommit -m "first website commit"
+[master (root-commit) 421c9b2] first website commit
+ Committer: Tiffany Tung <Tiff@Tiffanys-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 114 files changed, 10000 insertions(+)
+ create mode 100644 .Rhistory
+ create mode 100644 .Rproj.user/481447A8/console06/B6E1687
+ create mode 100644 .Rproj.user/481447A8/console06/B6E1687.env
+ create mode 100644 .Rproj.user/481447A8/console06/INDEX001
+ create mode 100644 .Rproj.user/481447A8/pcs/files-pane.pper
+ create mode 100644 .Rproj.user/481447A8/pcs/source-pane.pper
+ create mode 100644 .Rproj.user/481447A8/pcs/windowlayoutstate.pper
+ create mode 100644 .Rproj.user/481447A8/pcs/workbench-pane.pper
+ create mode 100644 .Rproj.user/481447A8/rmd-outputs
+ create mode 100644 .Rproj.user/481447A8/saved_source_markers
+ create mode 100644 .Rproj.user/481447A8/sources/prop/54CCABF2
+ create mode 100644 .Rproj.user/481447A8/sources/prop/9BFD4F43
+ create mode 100644 .Rproj.user/481447A8/sources/prop/INDEX
+ create mode 100644 .Rproj.user/481447A8/sources/s-A98C9C64/46B6A808
+ create mode 100644 .Rproj.user/481447A8/sources/s-A98C9C64/46B6A808-contents
+ create mode 100644 .Rproj.user/481447A8/sources/s-A98C9C64/7DEECF39
+ create mode 100644 .Rproj.user/481447A8/sources/s-A98C9C64/7DEECF39-contents
+ create mode 100644 .Rproj.user/481447A8/sources/s-A98C9C64/lock_file
+ create mode 100644 .Rproj.user/shared/notebooks/patch-chunk-names
+ create mode 100644 .Rproj.user/shared/notebooks/paths
+ create mode 100644 config.toml
+ create mode 100644 content/blog/2015-07-23-r-rmarkdown.Rmd
+ create mode 100644 content/blog/2015-07-23-r-rmarkdown.html
+ create mode 100644 content/blog/creating-a-new-theme.md
+ create mode 100644 content/blog/goisforlovers.md
+ create mode 100644 content/blog/hugoisforlovers.md
+ create mode 100644 content/blog/migrate-from-jekyll.md
+ create mode 100644 content/projects.md
+ create mode 100644 data/projects.yml
+ create mode 100644 index.Rmd
+ create mode 100644 public/404.html
+ create mode 100644 public/blog/2015-07-23-r-rmarkdown.Rmd
+ create mode 100644 public/blog/2015-07-23-r-rmarkdown/index.html
+ create mode 100644 public/blog/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png
+ create mode 100644 public/blog/creating-a-new-theme/index.html
+ create mode 100644 public/blog/goisforlovers/index.html
+ create mode 100644 public/blog/hugoisforlovers/index.html
+ create mode 100644 public/blog/index.html
+ create mode 100644 public/blog/index.xml
+ create mode 100644 public/blog/migrate-from-jekyll/index.html
+ create mode 100644 public/categories/development/index.html
+ create mode 100644 public/categories/development/index.xml
+ create mode 100644 public/categories/golang/index.html
+ create mode 100644 public/categories/golang/index.xml
+ create mode 100644 public/categories/index.html
+ create mode 100644 public/categories/index.xml
+ create mode 100644 public/categories/projects/index.html
+ create mode 100644 public/categories/projects/index.xml
+ create mode 100644 public/categories/r/index.html
+ create mode 100644 public/categories/r/index.xml
+ create mode 100644 public/css/main.css
+ create mode 100644 public/img/pic.png
+ create mode 100644 public/img/profile.png
+ create mode 100644 public/index.html
+ create mode 100644 public/index.xml
+ create mode 100644 public/js/docs.min.js
+ create mode 100644 public/js/ie10-viewport-bug-workaround.js
+ create mode 100644 public/js/main.js
+ create mode 100644 public/projects/index.html
+ create mode 100644 public/sitemap.xml
+ create mode 100644 public/tags/development/index.html
+ create mode 100644 public/tags/development/index.xml
+ create mode 100644 public/tags/go/index.html
+ create mode 100644 public/tags/go/index.xml
+ create mode 100644 public/tags/golang/index.html
+ create mode 100644 public/tags/golang/index.xml
+ create mode 100644 public/tags/hugo/index.html
+ create mode 100644 public/tags/hugo/index.xml
+ create mode 100644 public/tags/index.html
+ create mode 100644 public/tags/index.xml
+ create mode 100644 public/tags/plot/index.html
+ create mode 100644 public/tags/plot/index.xml
+ create mode 100644 public/tags/projects/index.html
+ create mode 100644 public/tags/projects/index.xml
+ create mode 100644 public/tags/r-markdown/index.html
+ create mode 100644 public/tags/r-markdown/index.xml
+ create mode 100644 public/tags/regression/index.html
+ create mode 100644 public/tags/regression/index.xml
+ create mode 100644 public/tags/templates/index.html
+ create mode 100644 public/tags/templates/index.xml
+ create mode 100644 public/tags/themes/index.html
+ create mode 100644 public/tags/themes/index.xml
+ create mode 100644 static/blog/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png
+ create mode 100644 static/img/pic.png
+ create mode 100644 themes/hugo-sustain/LICENSE.md
+ create mode 100644 themes/hugo-sustain/README.md
+ create mode 100644 themes/hugo-sustain/archetypes/default.md
+ create mode 100644 themes/hugo-sustain/exampleSite/config.toml
+ create mode 100644 themes/hugo-sustain/exampleSite/content/blog/creating-a-new-theme.md
+ create mode 100644 themes/hugo-sustain/exampleSite/content/blog/goisforlovers.md
+ create mode 100644 themes/hugo-sustain/exampleSite/content/blog/hugoisforlovers.md
+ create mode 100644 themes/hugo-sustain/exampleSite/content/blog/migrate-from-jekyll.md
+ create mode 100644 themes/hugo-sustain/exampleSite/content/projects.md
+ create mode 100644 themes/hugo-sustain/exampleSite/data/projects.yml
+ create mode 100644 themes/hugo-sustain/exampleSite/static/img/profile.png
+ create mode 100644 themes/hugo-sustain/images/screenshot.png
+ create mode 100644 themes/hugo-sustain/images/tn.png
+ create mode 100644 themes/hugo-sustain/layouts/404.html
+ create mode 100644 themes/hugo-sustain/layouts/_default/list.html
+ create mode 100644 themes/hugo-sustain/layouts/_default/projects.html
+ create mode 100644 themes/hugo-sustain/layouts/_default/single.html
+ create mode 100644 themes/hugo-sustain/layouts/index.html
+ create mode 100644 themes/hugo-sustain/layouts/partials/disqus.html
+ create mode 100644 themes/hugo-sustain/layouts/partials/footer.html
+ create mode 100644 themes/hugo-sustain/layouts/partials/head.html
+ create mode 100644 themes/hugo-sustain/layouts/partials/header.html
+ create mode 100644 themes/hugo-sustain/layouts/partials/js.html
+ create mode 100644 themes/hugo-sustain/layouts/partials/social.html
+ create mode 100644 themes/hugo-sustain/static/css/main.css
+ create mode 100644 themes/hugo-sustain/static/js/docs.min.js
+ create mode 100644 themes/hugo-sustain/static/js/ie10-viewport-bug-workaround.js
+ create mode 100644 themes/hugo-sustain/static/js/main.js
+ create mode 100644 themes/hugo-sustain/theme.toml
+ create mode 100644 website.Rproj
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git c onfig --global user.username YourGithubU sernametiff[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[Kyi[K[Ktiffany8622 5
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git r emote add origin https://github.com/Your GithubUsername/website.git (Links to an  external site.) #update with your github  username[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[Kgit r emote add origin https://github.com/tiff any86225/website.git
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git p ush origin master
+[KEnumerating objects: 159, done.
+[KCounting objects:   0% (1/159)[KCounting objects:   1% (2/159)[KCounting objects:   2% (4/159)[KCounting objects:   3% (5/159)[KCounting objects:   4% (7/159)[KCounting objects:   5% (8/159)[KCounting objects:   6% (10/159)[KCounting objects:   7% (12/159)[KCounting objects:   8% (13/159)[KCounting objects:   9% (15/159)[KCounting objects:  10% (16/159)[KCounting objects:  11% (18/159)[KCounting objects:  12% (20/159)[KCounting objects:  13% (21/159)[KCounting objects:  14% (23/159)[KCounting objects:  15% (24/159)[KCounting objects:  16% (26/159)[KCounting objects:  17% (28/159)[KCounting objects:  18% (29/159)[KCounting objects:  19% (31/159)[KCounting objects:  20% (32/159)[KCounting objects:  21% (34/159)[KCounting objects:  22% (35/159)[KCounting objects:  23% (37/159)[KCounting objects:  24% (39/159)[KCounting objects:  25% (40/159)[KCounting objects:  26% (42/159)[KCounting objects:  27% (43/159)[KCounting objects:  28% (45/159)[KCounting objects:  29% (47/159)[KCounting objects:  30% (48/159)[KCounting objects:  31% (50/159)[KCounting objects:  32% (51/159)[KCounting objects:  33% (53/159)[KCounting objects:  34% (55/159)[KCounting objects:  35% (56/159)[KCounting objects:  36% (58/159)[KCounting objects:  37% (59/159)[KCounting objects:  38% (61/159)[KCounting objects:  39% (63/159)[KCounting objects:  40% (64/159)[KCounting objects:  41% (66/159)[KCounting objects:  42% (67/159)[KCounting objects:  43% (69/159)[KCounting objects:  44% (70/159)[KCounting objects:  45% (72/159)[KCounting objects:  46% (74/159)[KCounting objects:  47% (75/159)[KCounting objects:  48% (77/159)[KCounting objects:  49% (78/159)[KCounting objects:  50% (80/159)[KCounting objects:  51% (82/159)[KCounting objects:  52% (83/159)[KCounting objects:  53% (85/159)[KCounting objects:  54% (86/159)[KCounting objects:  55% (88/159)[KCounting objects:  56% (90/159)[KCounting objects:  57% (91/159)[KCounting objects:  58% (93/159)[KCounting objects:  59% (94/159)[KCounting objects:  60% (96/159)[KCounting objects:  61% (97/159)[KCounting objects:  62% (99/159)[KCounting objects:  63% (101/159)[KCounting objects:  64% (102/159)[KCounting objects:  65% (104/159)[KCounting objects:  66% (105/159)[KCounting objects:  67% (107/159)[KCounting objects:  68% (109/159)[KCounting objects:  69% (110/159)[KCounting objects:  70% (112/159)[KCounting objects:  71% (113/159)[KCounting objects:  72% (115/159)[KCounting objects:  73% (117/159)[KCounting objects:  74% (118/159)[KCounting objects:  75% (120/159)[KCounting objects:  76% (121/159)[KCounting objects:  77% (123/159)[KCounting objects:  78% (125/159)[KCounting objects:  79% (126/159)[KCounting objects:  80% (128/159)[KCounting objects:  81% (129/159)[KCounting objects:  82% (131/159)[KCounting objects:  83% (132/159)[KCounting objects:  84% (134/159)[KCounting objects:  85% (136/159)[KCounting objects:  86% (137/159)[KCounting objects:  87% (139/159)[KCounting objects:  88% (140/159)[KCounting objects:  89% (142/159)[KCounting objects:  90% (144/159)[KCounting objects:  91% (145/159)[KCounting objects:  92% (147/159)[KCounting objects:  93% (148/159)[KCounting objects:  94% (150/159)[KCounting objects:  95% (152/159)[KCounting objects:  96% (153/159)[KCounting objects:  97% (155/159)[KCounting objects:  98% (156/159)[KCounting objects:  99% (158/159)[KCounting objects: 100% (159/159)[KCounting objects: 100% (159/159), done.
+Delta compression using up to 4 threads
+[KCompressing objects:   0% (1/137)[KCompressing objects:   1% (2/137)[KCompressing objects:   2% (3/137)[KCompressing objects:   3% (5/137)[KCompressing objects:   4% (6/137)[KCompressing objects:   5% (7/137)[KCompressing objects:   6% (9/137)[KCompressing objects:   7% (10/137)[KCompressing objects:   8% (11/137)[KCompressing objects:   9% (13/137)[KCompressing objects:  10% (14/137)[KCompressing objects:  11% (16/137)[KCompressing objects:  12% (17/137)[KCompressing objects:  13% (18/137)[KCompressing objects:  14% (20/137)[KCompressing objects:  15% (21/137)[KCompressing objects:  16% (22/137)[KCompressing objects:  17% (24/137)[KCompressing objects:  18% (25/137)[KCompressing objects:  19% (27/137)[KCompressing objects:  20% (28/137)[KCompressing objects:  21% (29/137)[KCompressing objects:  22% (31/137)[KCompressing objects:  23% (32/137)[KCompressing objects:  24% (33/137)[KCompressing objects:  25% (35/137)[KCompressing objects:  26% (36/137)[KCompressing objects:  27% (37/137)[KCompressing objects:  28% (39/137)[KCompressing objects:  29% (40/137)[KCompressing objects:  30% (42/137)[KCompressing objects:  31% (43/137)[KCompressing objects:  32% (44/137)[KCompressing objects:  33% (46/137)[KCompressing objects:  34% (47/137)[KCompressing objects:  35% (48/137)[KCompressing objects:  36% (50/137)[KCompressing objects:  37% (51/137)[KCompressing objects:  38% (53/137)[KCompressing objects:  39% (54/137)[KCompressing objects:  40% (55/137)[KCompressing objects:  41% (57/137)[KCompressing objects:  42% (58/137)[KCompressing objects:  43% (59/137)[KCompressing objects:  44% (61/137)[KCompressing objects:  45% (62/137)[KCompressing objects:  46% (64/137)[KCompressing objects:  47% (65/137)[KCompressing objects:  48% (66/137)[KCompressing objects:  49% (68/137)[KCompressing objects:  50% (69/137)[KCompressing objects:  51% (70/137)[KCompressing objects:  52% (72/137)[KCompressing objects:  53% (73/137)[KCompressing objects:  54% (74/137)[KCompressing objects:  55% (76/137)[KCompressing objects:  56% (77/137)[KCompressing objects:  57% (79/137)[KCompressing objects:  58% (80/137)[KCompressing objects:  59% (81/137)[KCompressing objects:  60% (83/137)[KCompressing objects:  61% (84/137)[KCompressing objects:  62% (85/137)[KCompressing objects:  63% (87/137)[KCompressing objects:  64% (88/137)[KCompressing objects:  65% (90/137)[KCompressing objects:  66% (91/137)[KCompressing objects:  67% (92/137)[KCompressing objects:  68% (94/137)[KCompressing objects:  69% (95/137)[KCompressing objects:  70% (96/137)[KCompressing objects:  71% (98/137)[KCompressing objects:  72% (99/137)[KCompressing objects:  73% (101/137)[KCompressing objects:  74% (102/137)[KCompressing objects:  75% (103/137)[KCompressing objects:  76% (105/137)[KCompressing objects:  77% (106/137)[KCompressing objects:  78% (107/137)[KCompressing objects:  79% (109/137)[KCompressing objects:  80% (110/137)[KCompressing objects:  81% (111/137)[KCompressing objects:  82% (113/137)[KCompressing objects:  83% (114/137)[KCompressing objects:  84% (116/137)[KCompressing objects:  85% (117/137)[KCompressing objects:  86% (118/137)[KCompressing objects:  87% (120/137)[KCompressing objects:  88% (121/137)[KCompressing objects:  89% (122/137)[KCompressing objects:  90% (124/137)[KCompressing objects:  91% (125/137)[KCompressing objects:  92% (127/137)[KCompressing objects:  93% (128/137)[KCompressing objects:  94% (129/137)[KCompressing objects:  95% (131/137)[KCompressing objects:  96% (132/137)[KCompressing objects:  97% (133/137)[KCompressing objects:  98% (135/137)[KCompressing objects:  99% (136/137)[KCompressing objects: 100% (137/137)[KCompressing objects: 100% (137/137), done.
+[KWriting objects:   0% (1/159)[KWriting objects:   1% (2/159)[KWriting objects:   2% (4/159)[KWriting objects:   3% (5/159)[KWriting objects:   4% (7/159)[KWriting objects:   5% (8/159)[KWriting objects:   6% (10/159)[KWriting objects:   7% (12/159)[KWriting objects:   8% (13/159)[KWriting objects:   9% (15/159)[KWriting objects:  10% (16/159)[KWriting objects:  11% (18/159)[KWriting objects:  12% (20/159)[KWriting objects:  13% (21/159)[KWriting objects:  15% (24/159)[KWriting objects:  16% (26/159)[KWriting objects:  17% (28/159)[KWriting objects:  18% (29/159)[KWriting objects:  19% (31/159)[KWriting objects:  20% (32/159)[KWriting objects:  21% (34/159)[KWriting objects:  22% (36/159)[KWriting objects:  23% (38/159)[KWriting objects:  24% (39/159)[KWriting objects:  25% (40/159)[KWriting objects:  26% (42/159)[KWriting objects:  27% (43/159)[KWriting objects:  28% (46/159)[KWriting objects:  29% (47/159)[KWriting objects:  30% (48/159)[KWriting objects:  31% (50/159)[KWriting objects:  32% (51/159)[KWriting objects:  33% (53/159)[KWriting objects:  34% (55/159)[KWriting objects:  35% (56/159)[KWriting objects:  36% (58/159)[KWriting objects:  37% (60/159)[KWriting objects:  38% (61/159)[KWriting objects:  39% (63/159)[KWriting objects:  40% (64/159)[KWriting objects:  41% (66/159)[KWriting objects:  42% (67/159)[KWriting objects:  43% (69/159)[KWriting objects:  44% (70/159)[KWriting objects:  45% (72/159)[KWriting objects:  46% (74/159)[KWriting objects:  47% (76/159)[KWriting objects:  48% (77/159)[KWriting objects:  49% (78/159)[KWriting objects:  50% (80/159)[KWriting objects:  51% (82/159)[KWriting objects:  52% (83/159)[KWriting objects:  53% (85/159)[KWriting objects:  54% (86/159)[KWriting objects:  55% (88/159)[KWriting objects:  56% (90/159)[KWriting objects:  57% (91/159)[KWriting objects:  58% (93/159)[KWriting objects:  59% (94/159)[KWriting objects:  60% (96/159)[KWriting objects:  61% (97/159)[KWriting objects:  62% (99/159)[KWriting objects:  63% (101/159)[KWriting objects:  64% (102/159)[KWriting objects:  65% (104/159)[KWriting objects:  66% (105/159)[KWriting objects:  67% (107/159)[KWriting objects:  68% (109/159)[KWriting objects:  69% (110/159)[KWriting objects:  70% (112/159)[KWriting objects:  71% (113/159)[KWriting objects:  72% (115/159)[KWriting objects:  73% (117/159)[KWriting objects:  74% (118/159)[KWriting objects:  75% (120/159)[KWriting objects:  76% (121/159)[KWriting objects:  77% (123/159)[KWriting objects:  78% (125/159)[KWriting objects:  79% (126/159)[KWriting objects:  80% (128/159)[KWriting objects:  81% (129/159)[KWriting objects:  82% (131/159)[KWriting objects:  83% (132/159)[KWriting objects:  84% (134/159)[KWriting objects:  85% (136/159)[KWriting objects:  86% (137/159)[KWriting objects:  87% (139/159)[KWriting objects:  88% (140/159)[KWriting objects:  89% (142/159)[KWriting objects:  91% (145/159)[KWriting objects:  92% (147/159)[KWriting objects:  93% (148/159)[KWriting objects:  94% (150/159)[KWriting objects:  95% (152/159)[KWriting objects:  96% (153/159)[KWriting objects:  97% (155/159)[KWriting objects:  98% (156/159)[KWriting objects:  99% (158/159)[KWriting objects: 100% (159/159)[KWriting objects: 100% (159/159), 720.73 KiB | 3.48 MiB/s, done.
+Total 159 (delta 43), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/43)[Kremote: Resolving deltas:   2% (1/43)[Kremote: Resolving deltas:   4% (2/43)[Kremote: Resolving deltas:   6% (3/43)[Kremote: Resolving deltas:   9% (4/43)[Kremote: Resolving deltas:  11% (5/43)[Kremote: Resolving deltas:  20% (9/43)[Kremote: Resolving deltas:  51% (22/43)[Kremote: Resolving deltas:  55% (24/43)[Kremote: Resolving deltas:  76% (33/43)[Kremote: Resolving deltas:  86% (37/43)[Kremote: Resolving deltas:  95% (41/43)[Kremote: Resolving deltas: 100% (43/43)[Kremote: Resolving deltas: 100% (43/43), done.[K
+To https://github.com/tiffany86225/website.git
+ * [new branch]      master -> master
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ [KTiffanys-MacBook-Pro:website Tiff$ pwd
+/Users/Tiff/Desktop/website
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git init
+Reinitialized existing Git repository in /Users/Tiff/Desktop/website/.git/
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git add .
