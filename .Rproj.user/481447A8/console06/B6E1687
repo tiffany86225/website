@@ -230,3 +230,29 @@ remote: Resolving deltas:   0% (0/7)[Kremote: Resolving deltas:  14% (1/7)[K
 To https://github.com/tiffany86225/website.git
    99a87d3..f041f96  master -> master
 ]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ [KTiffanys-MacBook-Pro:website Tiff$  git add . 
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$  git commit -m "some message"
+[master 57436fd] some message
+ Committer: Tiffany Tung <Tiff@Tiffanys-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 7 files changed, 46 insertions(+), 26 deletions(-)
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$  git push origin master 
+[KEnumerating objects: 29, done.
+[KCounting objects:   3% (1/29)[KCounting objects:   6% (2/29)[KCounting objects:  10% (3/29)[KCounting objects:  13% (4/29)[KCounting objects:  17% (5/29)[KCounting objects:  20% (6/29)[KCounting objects:  24% (7/29)[KCounting objects:  27% (8/29)[KCounting objects:  31% (9/29)[KCounting objects:  34% (10/29)[KCounting objects:  37% (11/29)[KCounting objects:  41% (12/29)[KCounting objects:  44% (13/29)[KCounting objects:  48% (14/29)[KCounting objects:  51% (15/29)[KCounting objects:  55% (16/29)[KCounting objects:  58% (17/29)[KCounting objects:  62% (18/29)[KCounting objects:  65% (19/29)[KCounting objects:  68% (20/29)[KCounting objects:  72% (21/29)[KCounting objects:  75% (22/29)[KCounting objects:  79% (23/29)[KCounting objects:  82% (24/29)[KCounting objects:  86% (25/29)[KCounting objects:  89% (26/29)[KCounting objects:  93% (27/29)[KCounting objects:  96% (28/29)[KCounting objects: 100% (29/29)[KCounting objects: 100% (29/29), done.
+Delta compression using up to 4 threads
+[KCompressing objects:   6% (1/15)[KCompressing objects:  13% (2/15)[KCompressing objects:  20% (3/15)[KCompressing objects:  26% (4/15)[KCompressing objects:  33% (5/15)[KCompressing objects:  40% (6/15)[KCompressing objects:  46% (7/15)[KCompressing objects:  53% (8/15)[KCompressing objects:  60% (9/15)[KCompressing objects:  66% (10/15)[KCompressing objects:  73% (11/15)[KCompressing objects:  80% (12/15)[KCompressing objects:  86% (13/15)[KCompressing objects:  93% (14/15)[KCompressing objects: 100% (15/15)[KCompressing objects: 100% (15/15), done.
+[KWriting objects:   6% (1/15)[KWriting objects:  13% (2/15)[KWriting objects:  20% (3/15)[KWriting objects:  26% (4/15)[KWriting objects:  33% (5/15)[KWriting objects:  40% (6/15)[KWriting objects:  46% (7/15)[KWriting objects:  53% (8/15)[KWriting objects:  60% (9/15)[KWriting objects:  66% (10/15)[KWriting objects:  73% (11/15)[KWriting objects:  80% (12/15)[KWriting objects:  86% (13/15)[KWriting objects:  93% (14/15)[KWriting objects: 100% (15/15)[KWriting objects: 100% (15/15), 1.95 KiB | 40.00 KiB/s, done.
+Total 15 (delta 8), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/8)[Kremote: Resolving deltas:  12% (1/8)[Kremote: Resolving deltas:  25% (2/8)[Kremote: Resolving deltas:  37% (3/8)[Kremote: Resolving deltas:  50% (4/8)[Kremote: Resolving deltas:  62% (5/8)[Kremote: Resolving deltas:  75% (6/8)[Kremote: Resolving deltas:  87% (7/8)[Kremote: Resolving deltas: 100% (8/8)[Kremote: Resolving deltas: 100% (8/8), completed with 8 local objects.[K
+To https://github.com/tiffany86225/website.git
+   f041f96..57436fd  master -> master
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$  [K[ATiffanys-MacBook-Pro:website Tiff$ [KTiffanys-MacBook-Pro:website Tiiff$ [K[ATiffanys-MacBook-Pro:website Tiff$ [KTiffanys-MacBook-Pro:website Tiff$ git add .  [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K 
