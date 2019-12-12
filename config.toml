@@ -1,4 +1,4 @@
-baseurl = "https://example.com/"
+baseurl = "/"
 languageCode = "en-US"
 title = "Tiffany Tung"
 # Enable comments by entering your Disqus shortname
@@ -20,9 +20,9 @@ theme = "hugo-sustain"
   custom_js  = []
 
 [params.social]
-  Github        = "username"
-  Email         = "email@example.com"
-  Twitter       = "username"
+  Github        = "tiffany86225"
+  Email         = "tiffany86225@gmail.com"
+  Twitter       = "tiffany86225"
   LinkedIn      = "username"
   Stackoverflow = "username"
   Medium        = "username"
