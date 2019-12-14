@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Tiffany Tung" />
+    <meta name="description" content="hi">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+    <title>Project 1</title>
+    <meta name="generator" content="Hugo 0.61.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/projects/">PROJECTS</a></li>
+        
+        <li><a href="/resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="/project1/">Project 1</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 1, 0001
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+
+<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
+## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
+## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.4.0</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<div id="introduction" class="section level4">
+<h4>0. Introduction</h4>
+<p><em>I have chosen three datasets, the ‘visits’ dataset, ‘pop’ dataset and ‘gas_price’ dataset for this project. The’visits’dataset includes visitation numbers to all National Parks in the US by year. I have decieded to remove a few variables relating to geological boundary lines since these will not be useful for the purpose of this project. A few important variables incldue the ‘year’, ‘state’, park full name (‘unit_name’), types of national park(‘unit_name’), number of visistors for each park (‘visitors’). The ‘pop’ dataset contains state population recorded on January 1st of each year. The ‘gas_price’ dataset contains US gas price from 1929 to 2015 and variables include the ‘year’, ‘state’, and ‘population’. The gas_price dataset contains gas prices from 1929 to 2015. Variables include the ‘year’, true gas price in each year (‘gas_current’) and gas price calculated to standard price in 2015 (‘gas_constant’), which accounts for inflation over the years.</em></p>
+<p><em>I personally really enjoyed traveling to different states and exploring different national parks. I thought it would be interesting to use summary statistics to make some intersting observations on these datasets. I’m wondering whether there is an association between gas price and the number of visitors in each year. </em></p>
+</div>
+<div id="tidying-spreadgather" class="section level4">
+<h4>1. Tidying: Spread/Gather</h4>
+<pre class="r"><code>untidy_pop&lt;- pop%&gt;%pivot_wider(names_from=&quot;state&quot;, values_from=&quot;pop&quot;)
+new_tidy &lt;-untidy_pop%&gt;% pivot_longer(2:52,names_to=&quot;state&quot;, values_to=&quot;pop&quot;)
+
+#My data is already very tidy and just to make sure I didn&#39;t mess up my data I did not use these data for the rest of the project</code></pre>
+<p><em>I first used pivot_wider to untidy the data by separating the categorical variable geometry in to POLYGON and MILTIPOLYGON. I then retidying them back in to one variable with pivot_longer.</em></p>
+</div>
+<div id="joiningmerging" class="section level4">
+<h4>2. Joining/Merging</h4>
+<pre class="r"><code>new &lt;- visits %&gt;% mutate(year_int= as.integer(as.character(visits$year)))  </code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre class="r"><code>new &lt;- new %&gt;% select(-year)
+new&lt;- new %&gt;% rename(&quot;year&quot;=year_int)
+national_new &lt;- inner_join(new,pop)</code></pre>
+<pre><code>## Joining, by = c(&quot;state&quot;, &quot;year&quot;)</code></pre>
+<pre><code>## Warning: Column `state` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre class="r"><code>national_new &lt;- inner_join(national_new,gas_price)</code></pre>
+<pre><code>## Joining, by = &quot;year&quot;</code></pre>
+<pre class="r"><code>national_new &lt;-national_new%&gt;% select(-metadata,-number_of_records,-gnis_id,-geometry)
+21560-20048</code></pre>
+<pre><code>## [1] 1512</code></pre>
+<p><em>First, I had to mutate a new year column (year_int) with year values as integers since the original ‘year’ in the “visits”&quot; data set was considered as factors and R had trouble joining. Then, I performed inner join by year with national park visits (‘new’), state population (‘pop’) and gas price. I did this because I wanted to be able to compare the gas price, visitors and state population in each year for the later part of the project. There were 21,560 cases in the original ‘visits’ dataset and 1512 cases were dropped after joining. </em></p>
+</div>
+<div id="wrangling" class="section level4">
+<h4>3. Wrangling</h4>
+<pre class="r"><code>national_new&lt;-national_new %&gt;% group_by(year,state)%&gt;%mutate(visitors_to_pop=visitors/pop)
+glimpse(national_new%&gt;%group_by(unit_name)%&gt;%filter(unit_type==&quot;National Park&quot;)%&gt;%
+  summarize(total_vis=sum(visitors))%&gt;%
+  arrange(desc(total_vis)))</code></pre>
+<pre><code>## Observations: 59
+## Variables: 2
+## $ unit_name &lt;fct&gt; Great Smoky Mountains National Park, Grand Canyon National …
+## $ total_vis &lt;int&gt; 510634272, 198445529, 183150702, 172988913, 169023834, 1593…</code></pre>
+<pre class="r"><code>glimpse(national_new%&gt;%group_by(state)%&gt;%summarize(mean_vispop=mean(visitors_to_pop))%&gt;%arrange(mean_vispop))</code></pre>
+<pre><code>## Observations: 50
+## Variables: 2
+## $ state       &lt;chr&gt; &quot;CT&quot;, &quot;KS&quot;, &quot;AL&quot;, &quot;TX&quot;, &quot;NH&quot;, &quot;OH&quot;, &quot;MN&quot;, &quot;MI&quot;, &quot;IL&quot;, &quot;NJ…
+## $ mean_vispop &lt;dbl&gt; 0.004835549, 0.012807510, 0.019631983, 0.023513669, 0.026…</code></pre>
+<pre class="r"><code>glimpse(national_new %&gt;%group_by(state)%&gt;%filter(unit_type==&quot;National Park&quot;)%&gt;%summarize(number_of_NP=n_distinct(unit_name))%&gt;% arrange(desc(number_of_NP)))</code></pre>
+<pre><code>## Observations: 25
+## Variables: 2
+## $ state        &lt;chr&gt; &quot;AK&quot;, &quot;CA&quot;, &quot;UT&quot;, &quot;CO&quot;, &quot;AZ&quot;, &quot;FL&quot;, &quot;WA&quot;, &quot;HI&quot;, &quot;SD&quot;, &quot;T…
+## $ number_of_NP &lt;int&gt; 9, 9, 5, 4, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1,…</code></pre>
+<pre class="r"><code>glimpse(national_new %&gt;% group_by(state)%&gt;% summarize(mean_vis=mean(visitors),sd_vis=sd(visitors),min_vis=min(visitors),max_vis=max(visitors), n_distinct(unit_name))%&gt;%arrange(mean_vis)
+)</code></pre>
+<pre><code>## Observations: 50
+## Variables: 6
+## $ state                   &lt;chr&gt; &quot;CT&quot;, &quot;NH&quot;, &quot;VT&quot;, &quot;KS&quot;, &quot;RI&quot;, &quot;NE&quot;, &quot;AL&quot;, &quot;AK…
+## $ mean_vis                &lt;dbl&gt; 16883.26, 29372.42, 32604.00, 33101.37, 42674…
+## $ sd_vis                  &lt;dbl&gt; 9061.918, 10568.503, 6397.538, 19284.242, 198…
+## $ min_vis                 &lt;int&gt; 4885, 2800, 22484, 1282, 2112, 0, 7961, 0, 18…
+## $ max_vis                 &lt;int&gt; 47220, 44881, 46289, 84695, 107601, 217522, 7…
+## $ `n_distinct(unit_name)` &lt;int&gt; 1, 1, 1, 5, 1, 4, 5, 22, 3, 13, 2, 3, 6, 5, 3…</code></pre>
+<pre class="r"><code>glimpse(national_new %&gt;% group_by(state)%&gt;% summarize(mean_pop=mean(pop,na.rm=T),sd_pop=sd(pop,na.rm=T)) %&gt;% arrange(mean_pop))</code></pre>
+<pre><code>## Observations: 50
+## Variables: 3
+## $ state    &lt;chr&gt; &quot;WY&quot;, &quot;AK&quot;, &quot;VT&quot;, &quot;ND&quot;, &quot;DC&quot;, &quot;SD&quot;, &quot;MT&quot;, &quot;NV&quot;, &quot;RI&quot;, &quot;ID&quot;, …
+## $ mean_pop &lt;dbl&gt; 415968.1, 552507.4, 618543.1, 648510.7, 651636.6, 706606.7, …
+## $ sd_pop   &lt;dbl&gt; 109147.29, 155299.84, 10880.05, 34994.66, 91676.19, 67908.36…</code></pre>
+<pre class="r"><code>glimpse(national_new %&gt;% group_by(year,state)%&gt;% summarize(mean_vis=mean(visitors),sd_vis=sd(visitors))%&gt;%arrange(mean_vis))</code></pre>
+<pre><code>## Observations: 3,698
+## Variables: 4
+## Groups: year [87]
+## $ year     &lt;int&gt; 1941, 1941, 1942, 1943, 1944, 1945, 1946, 1947, 1933, 1950, …
+## $ state    &lt;chr&gt; &quot;MO&quot;, &quot;ND&quot;, &quot;ND&quot;, &quot;ND&quot;, &quot;ND&quot;, &quot;ND&quot;, &quot;ND&quot;, &quot;ND&quot;, &quot;AK&quot;, &quot;IA&quot;, …
+## $ mean_vis &lt;dbl&gt; 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 724.…
+## $ sd_vis   &lt;dbl&gt; 0.0000, NA, NA, NA, NA, NA, NA, NA, 585.4332, NA, NA, NA, NA…</code></pre>
+<pre class="r"><code>glimpse(national_new%&gt;%group_by(year)%&gt;%summarize(sum_vis=sum(visitors), mean(gas_constant))%&gt;% arrange(sum_vis))</code></pre>
+<pre><code>## Observations: 87
+## Variables: 3
+## $ year                 &lt;int&gt; 1929, 1930, 1931, 1933, 1932, 1934, 1943, 1935, …
+## $ sum_vis              &lt;int&gt; 3011950, 3039886, 3218445, 3256620, 3552742, 609…
+## $ `mean(gas_constant)` &lt;dbl&gt; 2.38, 2.30, 2.18, 2.66, 2.61, 2.67, 2.30, 2.62, …</code></pre>
+<p><em>I mutated a new column called visitor_to_pop by dividing ‘visitors’ by ‘pop’ to get the porportion of populatoin that visited the Parks by state. The most popular National Park over the years is Great Smoky Mountains National Park and the least popular is Kobuk Valley National Park, with a total of 510634272 and 141155 visitors. Connecticut has the least visitors and Nevada has the most. Arkansas and California have the most number of all National Parks. Nevada has the highest mean visitors and Connecticut has the least. California has the highest mean population and Wyoming has the lowest. Florida has the highest mean = visitors in 1951. The year 1929 has the least total number of visitors and 2015 has the most.</em></p>
+</div>
+<div id="visualizing" class="section level4">
+<h4>4. Visualizing</h4>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><em>There was a slow increase in the average visitors since around 1925 and a drastic decrease around 1940s. This decrease is most likely due to WWII. After this time period there is a significant increase in the average visitors untill 1970s. This significant drop is probably due to the Vietnam War. Average visistors reached a highest point around 1985 and decrease over the next few decades.</em></p>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><em>The average gas price is on the chepaer end from 1945 to 1975 and the average visitors happened to also increase during that time period. However, this does not a suggest coorelation between the two variables. Average gas price increased around 1980s and so is the average visitors. This is probably due to more parks opening around that time period.</em></p>
+</div>
+<div id="dimensionality-reduction" class="section level4">
+<h4>5. Dimensionality Reduction</h4>
+<pre class="r"><code>parks_pop &lt;- inner_join(new,pop)</code></pre>
+<pre><code>## Joining, by = c(&quot;state&quot;, &quot;year&quot;)</code></pre>
+<pre><code>## Warning: Column `state` joining factors with different levels, coercing to
+## character vector</code></pre>
+<pre class="r"><code>parks_pop&lt;- inner_join(parks_pop,gas_price)</code></pre>
+<pre><code>## Joining, by = &quot;year&quot;</code></pre>
+<pre class="r"><code>parks_pop &lt;-parks_pop %&gt;% select(year,visitors,gas_current,gas_constant)%&gt;%cor
+parks &lt;- parks_pop %&gt;%scale%&gt;%prcomp()
+
+
+parks$rotation[,1:2]%&gt;%as.data.frame%&gt;%rownames_to_column%&gt;%
+  ggplot()+geom_hline(aes(yintercept=0),lty=2)+
+  geom_vline(aes(xintercept=0),lty=2)+ylab(&quot;PC2&quot;)+xlab(&quot;PC1&quot;)+
+  geom_segment(aes(x=0,y=0,xend=PC1,yend=PC2),arrow=arrow(),col=&quot;red&quot;)+
+  geom_label(aes(x=PC1*1.1,y=PC2*1.1,label=rowname))</code></pre>
+<p><img src="/Project1_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><em>The gas_constant, gas_current and year are all pointing to the left while visistors is pointing to the right. This PCA shows that there is no correlation between visitors and the rest of the variables.</em></p>
+</div>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/docs.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Tiffany Tung" />
+    <meta name="description" content="hi">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+    <title>Python</title>
+    <meta name="generator" content="Hugo 0.61.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/projects/">PROJECTS</a></li>
+        
+        <li><a href="/resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="/blog/python/">Python</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          December 13, 2019
+            &nbsp;&nbsp;
+            
+            <span class="label label-success">phython</span>
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+
+<p><img src="/blog/2019-12-13-python_files/pie-1.png" /></p>
+<pre class="r"><code>library(reticulate)</code></pre>
+<p>The function below takes a string of nucleotides as input and returns a dictionary with all 3-mers present in that string, and the number of times that each 3-mer occurs. Then the function was used to find the 3-mers in the DNA sequence my_seq1 defined below.</p>
+<pre class="python"><code>
+my_seq1 = &quot;ATCATCATG&quot;
+my_seq2 = &quot;CAGCCCAATCAGGCTCTACTGCCACTAAACTTACGCAGGATATATTTACGCCGACGTACT&quot;
+
+result = {}
+for i in range(0, len(my_seq1)-2):
+    mer = my_seq1[i:i+3]
+    if mer in result:
+        result[mer] += 1
+    else:
+        result[mer] = 1
+
+print(result)</code></pre>
+<pre><code>## {&#39;ATG&#39;: 1, &#39;CAT&#39;: 2, &#39;ATC&#39;: 2, &#39;TCA&#39;: 2}</code></pre>
+<pre class="python"><code>result = {}
+for i in range(0, len(my_seq2)-2):
+    mer = my_seq1[i:i+3]
+    if mer in result:
+        result[mer] += 1
+    else:
+        result[mer] = 1
+
+print(result)</code></pre>
+<pre><code>## {&#39;&#39;: 49, &#39;ATG&#39;: 1, &#39;ATC&#39;: 2, &#39;G&#39;: 1, &#39;CAT&#39;: 2, &#39;TG&#39;: 1, &#39;TCA&#39;: 2}</code></pre>
+<p>The function belowa takes FASTA file as input, opens that file, counts the number of sequences in the file (by counting the number of lines in the file that start with a “&gt;” symbol), and returns the count.
+The file <code>CD4.fasta</code> contains amino acid sequences of the CD4 membrane protein that is found on the surface of the immune cells.</p>
+<pre class="python"><code>
+file_handle = open(&quot;CD4.fasta&quot;, &quot;r&quot;) # open in &#39;r&#39; mode  to read the file
+#contents = file_handle.read() # reads the entire file
+count = 0
+for x in file_handle:
+    if &quot;&gt;&quot; in x:
+        count += 1
+
+file_handle.close() # always close at the end
+print(count)</code></pre>
+<pre><code>## 18</code></pre>
+<p>The Needleman-Wunsch algorithm is used to create a function that runs the Smith-Waterman algorithm instead.A matrix of scores is produced.</p>
+<pre class="python"><code>import numpy as np
+
+match_score = 2
+mismatch_score = -1
+gap_penalty = -1
+
+# Make a score matrix with these two sequences
+seq1 = &quot;ATGAT&quot;
+seq2 = &quot;AAGGAT&quot;
+
+
+def nw_function(seq1,seq2,gap_penalty=-1, match_score=1, mismatch_score=-1):
+    m=len(seq1) 
+    n=len(seq2) 
+    score=np.empty(shape=[n+1,m+1]) 
+   
+    for j in range(0, m + 1): score[0][j] = gap_penalty * j
+    for i in range(0, n + 1): score[i][0] = gap_penalty * i
+    
+    for i in range(1, n + 1): 
+        for j in range(1, m + 1):
+            insert = score[i - 1][j] + gap_penalty 
+            delete = score[i][j - 1] + gap_penalty 
+            match = score[i - 1][j - 1] + match_score if seq1[j-1]==seq2[i-1] else mismatch_score
+            score[i][j] = max(match,delete,insert,0)
+    return score
+
+
+nw_function(seq1,seq2,gap_penalty,match_score,mismatch_score)
+</code></pre>
+<pre><code>## array([[ 0., -1., -2., -3., -4., -5.],
+##        [-1.,  2.,  1.,  0.,  0.,  0.],
+##        [-2.,  1.,  0.,  0.,  2.,  1.],
+##        [-3.,  0.,  0.,  2.,  1.,  0.],
+##        [-4.,  0.,  0.,  2.,  1.,  0.],
+##        [-5.,  0.,  0.,  1.,  4.,  3.],
+##        [-6.,  0.,  2.,  1.,  3.,  6.]])</code></pre>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/docs.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

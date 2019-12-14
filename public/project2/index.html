@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Tiffany Tung" />
+    <meta name="description" content="hi">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+    <title>Project 2: Modeling, Testing, and Predicting</title>
+    <meta name="generator" content="Hugo 0.61.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/projects/">PROJECTS</a></li>
+        
+        <li><a href="/resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="/project2/">Project 2: Modeling, Testing, and Predicting</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 1, 0001
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+
+<div id="modeling" class="section level1">
+<h1>Modeling</h1>
+<ul>
+<li><h4 id="introduction">Introduction</h4>
+The dataset ‘Salaries’ contains information on academic salary of assistant professors, associate professors and professors in a U.S. university. This dataset has 6 variables, 3 categorical and 3 numeric, with 397 observations. The variable ‘rank’ divides the ranks of professors into ‘AssocProf’, ‘AsstProf’ and ‘Prof’. The variable ‘discipline’ includes group ‘A’,“theorectical departemnts, and ‘B’,”applied departemnts&quot;. Numeric variables, ‘yrs.since.phd’, ‘yrs.service’ and ‘salary’ illustrates years since PhD, years of service and salary in dollars, respectively. Lastly, the ‘sex’ variable includes ‘female’ and ’male.</li>
+</ul>
+<div id="manova" class="section level4">
+<h4>MANOVA</h4>
+<pre class="r"><code>Salaries &lt;- read_csv(&quot;Salaries.csv&quot;)
+man1&lt;-manova(cbind(yrs.since.phd,yrs.service,salary)~sex, data=Salaries)
+summary(man1)</code></pre>
+<pre><code>## Df Pillai approx F num Df den Df Pr(&gt;F)
+## sex 1 0.032223 4.3618 3 393 0.004884 **
+## Residuals 395
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1</code></pre>
+<pre class="r"><code>summary.aov(man1)</code></pre>
+<pre><code>## Response yrs.since.phd :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## sex 1 1456 1455.91 8.9424 0.002961 **
+## Residuals 395 64310 162.81
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Response yrs.service :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## sex 1 1583 1583.27 9.5622 0.002127 **
+## Residuals 395 65403 165.58
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Response salary :
+## Df Sum Sq Mean Sq F value Pr(&gt;F)
+## sex 1 6.9800e+09 6980014930 7.7377 0.005667 **
+## Residuals 395 3.5632e+11 902077538
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1</code></pre>
+<pre class="r"><code>Salaries%&gt;%group_by(sex)%&gt;%summarize(mean(yrs.since.phd),mean(yrs.service),mean(salary))</code></pre>
+<pre><code>## # A tibble: 2 x 4
+## sex `mean(yrs.since.phd)` `mean(yrs.service)`
+`mean(salary)`
+## &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Female 16.5 11.6 101002.
+## 2 Male 22.9 18.3 115090.</code></pre>
+<pre class="r"><code>1-0.95^4</code></pre>
+<pre><code>## [1] 0.1854938</code></pre>
+<pre class="r"><code>0.05/4</code></pre>
+<pre><code>## [1] 0.0125</code></pre>
+<p><em>At least one of the numeric variables (yrs.since.phd,yrs.service or salary) show a mean difference across sex.</em>
+<em>Since the categorical variable only has 2 levels (Female &amp; Male), post-hoc t test was not performend. A totalt 4 tests were performed (1 MANOVA + 3 ANOVA).</em>
+<em>The probability of at least type I error is 0.1855 and the bonferroni correction is 0.0125.</em>
+<em>A MANOVA was performed to determine the effect of sex on salary, years since phd and years of service. Significant differences were found among the two sexes on the three numveric variables. Pillai =0.03, pseudo F (3,395)= 4.36, p&lt;0.01. Three ANOVA tests were performed. The univariate ANOVAs for all three numeric variables were also significant with the bonferroni correction, p&lt;0.0125.</em>
+<em>MANOVA assumptions include random samples. multivariat normality, homogeneity, linearity, no outliers and no multicollinearity. Except for random samples, the rest of the assumptions are hard to test and meet and probably not all of them are met.</em></p>
+<pre class="r"><code>Salaries%&gt;%group_by(sex)%&gt;%
+  summarize(means=mean(salary))%&gt;%
+  summarize(`mean_diff:`=diff(means))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   `mean_diff:`
+##          &lt;dbl&gt;
+## 1       14088.</code></pre>
+<pre class="r"><code>set.seed(348)
+rand_dist&lt;-vector()
+
+for(i in 1:5000){
+newsal&lt;-data.frame(salary=sample(Salaries$salary),sex=Salaries$sex) 
+rand_dist[i]&lt;-mean(newsal[newsal$sex==&quot;Female&quot;,]$salary)-
+              mean(newsal[newsal$sex==&quot;Male&quot;,]$salary)}
+mean(rand_dist&gt;14088.01)*2</code></pre>
+<pre><code>## [1] 0.008</code></pre>
+<pre class="r"><code>{hist(rand_dist,main=&quot;&quot;,ylab=&quot;&quot;); abline(v =-14088.01,col=&quot;red&quot;);abline(v = 14088.01,col=&quot;red&quot;)}</code></pre>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-2-1.png" width="768" style="display: block; margin: auto;" />
+<em>H0: The mean salary is the same for female vs. male professors.</em></p>
+<p><em>HA: The mean salary is different for female vs. male professors.</em></p>
+<p><em>The randomination test yields a p value of 0.008 which shows that the mean salary is different for female vs. male professors. (p value&lt;0.05).</em></p>
+</div>
+<div id="linear-regression-model" class="section level4">
+<h4>Linear Regression Model</h4>
+<pre class="r"><code>Salaries$service_c &lt;-Salaries$yrs.service- mean(Salaries$yrs.service)
+fit&lt;-lm(salary ~sex*service_c, data=Salaries)
+summary(fit)</code></pre>
+<pre><code>##
+## Call:
+## lm(formula = salary ~ sex * service_c, data = Salaries)
+##
+## Residuals:
+## Min 1Q Median 3Q Max
+## -80381 -20258 -3727 16353 102536
+##
+## Coefficients:
+## Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept) 110908.9 5542.4 20.011 &lt; 2e-16 ***
+## sexMale 3716.5 5742.7 0.647 0.51791
+## service_c 1637.3 523.0 3.130 0.00188 **
+## sexMale:service_c -931.7 535.2 -1.741 0.08251 .
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1
+##
+## Residual standard error: 28420 on 393 degrees of freedom
+## Multiple R-squared: 0.1266, Adjusted R-squared: 0.1199
+## F-statistic: 18.98 on 3 and 393 DF, p-value: 1.622e-11</code></pre>
+<p><em>Salary = 110908.9+3716.5sex+1637.3service-931.7(sex:service)</em></p>
+<p><em>Female=0. Salary = 110908.9+1637.3service</em>
+<em>For female professors, a 1 year increase in years of service corresponds to a $112546.2 increase in salary.</em></p>
+<p><em>Male=1. Salary = 110908.9+3716.5+1637.3service-931.7service</em>
+<em>For male professors, a 1 year increase in years of service corresponds to a $115331 increase in salary.</em></p>
+<p><em>For 1 year of service, salary for male professors is $2784.8 higher than female professors.</em></p>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-4-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#Assumptions
+library(ggplot2)
+resids&lt;-fit$residuals
+
+fitvals&lt;-fit$fitted.values
+ggplot()+geom_point(aes(fitvals,resids))+geom_hline(yintercept=0, col=&quot;red&quot;)+ ggtitle(&quot;Linearity&quot;)</code></pre>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot()+geom_histogram(aes(resids),bins=20)+ggtitle(&quot;Normality&quot;)</code></pre>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-5-2.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot()+geom_qq(aes(sample=resids))+geom_qq_line(aes(sample=resids), color=&#39;red&#39;)+ggtitle(&quot;Normality&quot;)</code></pre>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-5-3.png" width="768" style="display: block; margin: auto;" /></p>
+<p><em>The points look somewhat fanned out. Homoskedsaticity is probably not met.</em>
+<em>Normality is moderate.</em></p>
+<pre class="r"><code>library(sandwich)
+library(lmtest)
+summary(fit)$coef[,1:2]</code></pre>
+<pre><code>##                       Estimate Std. Error
+## (Intercept)         82068.5087  7568.7220
+## sexMale             20128.6258  7991.1381
+## yrs.service          1637.2997   523.0264
+## sexMale:yrs.service  -931.7363   535.2434</code></pre>
+<pre class="r"><code>coeftest(fit, vcov = vcovHC(fit))[,1:2]</code></pre>
+<pre><code>##                       Estimate Std. Error
+## (Intercept)         82068.5087  4303.3023
+## sexMale             20128.6258  5043.3783
+## yrs.service          1637.2997   446.3857
+## sexMale:yrs.service  -931.7363   468.3777</code></pre>
+<p><em>Compared to the original SEs, the robust SEs are significantly lower. This suggests that the original SEs were good enough. </em></p>
+<p><em>The proportion of the variation in the outcome this model explains is 0.1266.</em></p>
+</div>
+<div id="bootstrapped-standard-errors" class="section level4">
+<h4>Bootstrapped Standard Errors</h4>
+<pre class="r"><code>samp_distn&lt;-replicate(5000, {
+  boot_dat&lt;-Salaries[sample(nrow(Salaries),replace=TRUE),]
+  fit&lt;-lm(salary~sex*service_c,data=boot_dat)
+  coef(fit)
+})
+samp_distn%&gt;%t%&gt;%as.data.frame%&gt;%summarize_all(sd)</code></pre>
+<pre><code>##   (Intercept)  sexMale service_c sexMale:service_c
+## 1    5612.723 5841.349  461.3408          481.6852</code></pre>
+<pre class="r"><code>coeftest(fit)[,1:2]</code></pre>
+<pre><code>##                       Estimate Std. Error
+## (Intercept)         82068.5087  7568.7220
+## sexMale             20128.6258  7991.1381
+## yrs.service          1637.2997   523.0264
+## sexMale:yrs.service  -931.7363   535.2434</code></pre>
+<pre class="r"><code>coeftest(fit, vcov=vcovHC(fit))[,1:2]</code></pre>
+<pre><code>##                       Estimate Std. Error
+## (Intercept)         82068.5087  4303.3023
+## sexMale             20128.6258  5043.3783
+## yrs.service          1637.2997   446.3857
+## sexMale:yrs.service  -931.7363   468.3777</code></pre>
+<p><em>The bootstrapped SEs are lower than the originial SEs but still higher than the robust SEs.</em></p>
+</div>
+<div id="logistic-regression" class="section level4">
+<h4>Logistic Regression</h4>
+<pre class="r"><code>Sal &lt;- Salaries %&gt;% mutate(y = ifelse(sex ==&quot;Male&quot;,1,0))%&gt;%select(-X1,-service_c,-sex)
+fit1&lt;-glm(y~salary+yrs.service,data=Sal,family=&quot;binomial&quot;)
+coeftest(fit1)</code></pre>
+<pre><code>##
+## z test of coefficients:
+##
+## Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept) 3.5588e-01 7.1102e-01 0.5005 0.61671
+## salary 1.2431e-05 7.2960e-06 1.7039 0.08840 .
+## yrs.service 3.5365e-02 1.6876e-02 2.0955 0.03613 *
+## ---
+## Signif. codes: 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1
+&#39; &#39; 1</code></pre>
+<pre class="r"><code>exp(coeftest(fit1))</code></pre>
+<pre><code>## 
+## z test of coefficients:
+## 
+##             Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)   1.4274     2.0361  1.6496    1.853
+## salary        1.0000     1.0000  5.4953    1.092
+## yrs.service   1.0360     1.0170  8.1296    1.037</code></pre>
+<p><em>Controlling for years of service, for every 1 dollar increase in salary, odds of sex change by a factor of 1.</em>
+<em>Controlling for salary, for every 1 year increase in years of service, odds of sex change by a factor of 1.036.</em></p>
+<pre class="r"><code>#Confusion matrix
+prob&lt;-predict(fit1,type=&quot;response&quot;)
+pred&lt;-ifelse(prob&gt;.5,1,0)
+table(truth=Sal$y,prediction=pred)%&gt;%addmargins</code></pre>
+<pre><code>##      prediction
+## truth   1 Sum
+##   0    39  39
+##   1   358 358
+##   Sum 397 397</code></pre>
+<pre class="r"><code>class_diag&lt;-function(probs,truth){
+  
+  tab&lt;-table(factor(probs&gt;.5,levels=c(&quot;FALSE&quot;,&quot;TRUE&quot;)),truth)
+  acc=sum(diag(tab))/sum(tab)
+  sens=tab[2,2]/colSums(tab)[2]
+  spec=tab[1,1]/colSums(tab)[1]
+  ppv=tab[2,2]/rowSums(tab)[2]
+
+  if(is.numeric(truth)==FALSE &amp; is.logical(truth)==FALSE) truth&lt;-as.numeric(truth)-1
+  
+  #CALCULATE EXACT AUC
+  ord&lt;-order(probs, decreasing=TRUE)
+  probs &lt;- probs[ord]
+  truth &lt;- truth[ord]
+ 
+  TPR=cumsum(truth)/max(1,sum(truth)) 
+  FPR=cumsum(!truth)/max(1,sum(!truth))
+  
+  dup&lt;-c(probs[-1]&gt;=probs[-length(probs)], FALSE)
+  TPR&lt;-c(0,TPR[!dup],1)
+  FPR&lt;-c(0,FPR[!dup],1)
+  
+  n &lt;- length(TPR)
+  auc&lt;- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n]) )
+
+  data.frame(acc,sens,spec,ppv,auc)
+}
+class_diag(prob,Sal$y)</code></pre>
+<pre><code>##         acc sens spec       ppv       auc
+## 1 0.9017632    1    0 0.9017632 0.6777682</code></pre>
+<p><em>The accuracy is 0.9, TPR, porpotion of male correctly classified, is 1, TNR, porportion of female correctly classified, is 0 and PPV is 0.9.</em></p>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-10-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ROC plot &amp; AUC
+Sal1 &lt;- Sal %&gt;% select(-logit)
+library(plotROC)
+ROCplot&lt;-ggplot(Sal)+geom_roc(aes(d=y,m=prob), n.cuts=0)+  geom_segment(aes(x=0,xend=1,y=0,yend=1),lty=2)
+
+ROCplot</code></pre>
+<p><img src="/Project2_files/figure-html/unnamed-chunk-11-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>library(pROC)
+auc(Sal$y,prob)</code></pre>
+<pre><code>## Area under the curve: 0.6778</code></pre>
+<p><em>AUC is 0.68 which is poor. The probability that a random person thats male has a higher prediction than a random selected person who is female.</em></p>
+<pre class="r"><code>#10-fold CV
+set.seed(1234)
+k=10 
+data1&lt;-Sal1[sample(nrow(Sal1)),] 
+folds&lt;-cut(seq(1:nrow(Sal1)),breaks=k,labels=F)
+diags&lt;-NULL
+for(i in 1:k){
+  train&lt;-data1[folds!=i,] 
+  test&lt;-data1[folds==i,]
+  truth&lt;-test$y
+  
+  fit&lt;-glm(y~salary+yrs.service,data=train,family=&quot;binomial&quot;)
+  probs&lt;-predict(fit,newdata = test,type=&quot;response&quot;)
+  diags&lt;-rbind(diags,class_diag(probs,truth))
+}
+
+apply(diags,2,mean) </code></pre>
+<pre><code>##       acc      sens      spec       ppv       auc 
+## 0.9016667 1.0000000 0.0000000 0.9016667 0.7021192</code></pre>
+<p><em>The 10-fold CV gives a accuracy of 0.9, sensitivity of 1, recall of 0.9 and auc of 0.7. There’s no significant change with accuracy nor recall but the auc increased by about 0.03 </em></p>
+</div>
+<div id="lasso" class="section level4">
+<h4>Lasso</h4>
+<p><em>None of the variables are lasso significant.</em></p>
+<p><em>I still included the code for the 10-fold CV on this model to fullfil the requiremnt of this question but since there’s no lasso significant varibale I ran it with all the variables.</em></p>
+<p><em>Since none of the variables are lasso significant, accuracy comparison cannot be made. The best accuracy for this model is the accuracy from the logistic regression (0.9). </em></p>
+<p>…</p>
+</div>
+</div>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/docs.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>

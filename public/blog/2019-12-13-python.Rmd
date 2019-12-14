@@ -1,0 +1,106 @@
+---
+title: Python
+author: Tiffany Tung
+date: '2019-12-13'
+slug: python
+categories: []
+tags:
+  - phython
+description: ''
+---
+
+![](/blog/2019-12-13-python_files/pie-1.png)
+
+```{r}
+
+library(reticulate)
+
+```
+
+
+
+
+The function below  takes a string of nucleotides as input and returns a dictionary with all 3-mers present in that string, and the number of times that each 3-mer occurs. Then the function was used to find the 3-mers in the DNA sequence my_seq1 defined below.
+```{python}
+
+my_seq1 = "ATCATCATG"
+my_seq2 = "CAGCCCAATCAGGCTCTACTGCCACTAAACTTACGCAGGATATATTTACGCCGACGTACT"
+
+result = {}
+for i in range(0, len(my_seq1)-2):
+    mer = my_seq1[i:i+3]
+    if mer in result:
+        result[mer] += 1
+    else:
+        result[mer] = 1
+
+print(result)
+
+result = {}
+for i in range(0, len(my_seq2)-2):
+    mer = my_seq1[i:i+3]
+    if mer in result:
+        result[mer] += 1
+    else:
+        result[mer] = 1
+
+print(result)
+```
+
+
+
+The function belowa takes FASTA file as input, opens that file, counts the number of sequences in the file (by counting the number of lines in the file that start with a “>” symbol), and returns the count. 
+The file `CD4.fasta` contains amino acid sequences of the CD4 membrane protein that is found on the surface of the immune cells.
+
+```{python}
+
+file_handle = open("CD4.fasta", "r") # open in 'r' mode  to read the file
+#contents = file_handle.read() # reads the entire file
+count = 0
+for x in file_handle:
+    if ">" in x:
+        count += 1
+
+file_handle.close() # always close at the end
+print(count)
+
+```
+
+
+The Needleman-Wunsch algorithm is used to create a function that runs the Smith-Waterman algorithm instead.A matrix of scores is produced. 
+
+
+
+```{python}
+import numpy as np
+
+match_score = 2
+mismatch_score = -1
+gap_penalty = -1
+
+# Make a score matrix with these two sequences
+seq1 = "ATGAT"
+seq2 = "AAGGAT"
+
+
+def nw_function(seq1,seq2,gap_penalty=-1, match_score=1, mismatch_score=-1):
+    m=len(seq1) 
+    n=len(seq2) 
+    score=np.empty(shape=[n+1,m+1]) 
+   
+    for j in range(0, m + 1): score[0][j] = gap_penalty * j
+    for i in range(0, n + 1): score[i][0] = gap_penalty * i
+    
+    for i in range(1, n + 1): 
+        for j in range(1, m + 1):
+            insert = score[i - 1][j] + gap_penalty 
+            delete = score[i][j - 1] + gap_penalty 
+            match = score[i - 1][j - 1] + match_score if seq1[j-1]==seq2[i-1] else mismatch_score
+            score[i][j] = max(match,delete,insert,0)
+    return score
+
+
+nw_function(seq1,seq2,gap_penalty,match_score,mismatch_score)
+
+
+```

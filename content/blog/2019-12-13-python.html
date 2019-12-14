@@ -1,0 +1,91 @@
+---
+title: Python
+author: Tiffany Tung
+date: '2019-12-13'
+slug: python
+categories: []
+tags:
+  - phython
+description: ''
+---
+
+
+
+<p><img src="/blog/2019-12-13-python_files/pie-1.png" /></p>
+<pre class="r"><code>library(reticulate)</code></pre>
+<p>The function below takes a string of nucleotides as input and returns a dictionary with all 3-mers present in that string, and the number of times that each 3-mer occurs. Then the function was used to find the 3-mers in the DNA sequence my_seq1 defined below.</p>
+<pre class="python"><code>
+my_seq1 = &quot;ATCATCATG&quot;
+my_seq2 = &quot;CAGCCCAATCAGGCTCTACTGCCACTAAACTTACGCAGGATATATTTACGCCGACGTACT&quot;
+
+result = {}
+for i in range(0, len(my_seq1)-2):
+    mer = my_seq1[i:i+3]
+    if mer in result:
+        result[mer] += 1
+    else:
+        result[mer] = 1
+
+print(result)</code></pre>
+<pre><code>## {&#39;ATG&#39;: 1, &#39;CAT&#39;: 2, &#39;ATC&#39;: 2, &#39;TCA&#39;: 2}</code></pre>
+<pre class="python"><code>result = {}
+for i in range(0, len(my_seq2)-2):
+    mer = my_seq1[i:i+3]
+    if mer in result:
+        result[mer] += 1
+    else:
+        result[mer] = 1
+
+print(result)</code></pre>
+<pre><code>## {&#39;&#39;: 49, &#39;ATG&#39;: 1, &#39;ATC&#39;: 2, &#39;G&#39;: 1, &#39;CAT&#39;: 2, &#39;TG&#39;: 1, &#39;TCA&#39;: 2}</code></pre>
+<p>The function belowa takes FASTA file as input, opens that file, counts the number of sequences in the file (by counting the number of lines in the file that start with a “&gt;” symbol), and returns the count.
+The file <code>CD4.fasta</code> contains amino acid sequences of the CD4 membrane protein that is found on the surface of the immune cells.</p>
+<pre class="python"><code>
+file_handle = open(&quot;CD4.fasta&quot;, &quot;r&quot;) # open in &#39;r&#39; mode  to read the file
+#contents = file_handle.read() # reads the entire file
+count = 0
+for x in file_handle:
+    if &quot;&gt;&quot; in x:
+        count += 1
+
+file_handle.close() # always close at the end
+print(count)</code></pre>
+<pre><code>## 18</code></pre>
+<p>The Needleman-Wunsch algorithm is used to create a function that runs the Smith-Waterman algorithm instead.A matrix of scores is produced.</p>
+<pre class="python"><code>import numpy as np
+
+match_score = 2
+mismatch_score = -1
+gap_penalty = -1
+
+# Make a score matrix with these two sequences
+seq1 = &quot;ATGAT&quot;
+seq2 = &quot;AAGGAT&quot;
+
+
+def nw_function(seq1,seq2,gap_penalty=-1, match_score=1, mismatch_score=-1):
+    m=len(seq1) 
+    n=len(seq2) 
+    score=np.empty(shape=[n+1,m+1]) 
+   
+    for j in range(0, m + 1): score[0][j] = gap_penalty * j
+    for i in range(0, n + 1): score[i][0] = gap_penalty * i
+    
+    for i in range(1, n + 1): 
+        for j in range(1, m + 1):
+            insert = score[i - 1][j] + gap_penalty 
+            delete = score[i][j - 1] + gap_penalty 
+            match = score[i - 1][j - 1] + match_score if seq1[j-1]==seq2[i-1] else mismatch_score
+            score[i][j] = max(match,delete,insert,0)
+    return score
+
+
+nw_function(seq1,seq2,gap_penalty,match_score,mismatch_score)
+</code></pre>
+<pre><code>## array([[ 0., -1., -2., -3., -4., -5.],
+##        [-1.,  2.,  1.,  0.,  0.,  0.],
+##        [-2.,  1.,  0.,  0.,  2.,  1.],
+##        [-3.,  0.,  0.,  2.,  1.,  0.],
+##        [-4.,  0.,  0.,  2.,  1.,  0.],
+##        [-5.,  0.,  0.,  1.,  4.,  3.],
+##        [-6.,  0.,  2.,  1.,  3.,  6.]])</code></pre>

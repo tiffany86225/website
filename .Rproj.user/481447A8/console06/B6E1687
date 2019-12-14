@@ -605,3 +605,38 @@ remote: Resolving deltas:   0% (0/11)[Kremote: Resolving deltas:   9% (1/11)[
 To https://github.com/tiffany86225/website.git
    84a70e3..dc46a81  master -> master
 ]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git  add . 
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git  commit -m "some message"
+[master 79acea8] some message
+ Committer: Tiffany Tung <Tiff@Tiffanys-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 9 files changed, 417 insertions(+), 10 deletions(-)
+ create mode 100644 .Rproj.user/481447A8/sources/prop/CC052FE7
+ create mode 100644 .Rproj.user/481447A8/sources/s-5AA210D3/6DEA9A61-contents
+ create mode 100644 content/projects.html
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git  push origin master 
+[KEnumerating objects: 34, done.
+[KCounting objects:   2% (1/34)[KCounting objects:   5% (2/34)[KCounting objects:   8% (3/34)[KCounting objects:  11% (4/34)[KCounting objects:  14% (5/34)[KCounting objects:  17% (6/34)[KCounting objects:  20% (7/34)[KCounting objects:  23% (8/34)[KCounting objects:  26% (9/34)[KCounting objects:  29% (10/34)[KCounting objects:  32% (11/34)[KCounting objects:  35% (12/34)[KCounting objects:  38% (13/34)[KCounting objects:  41% (14/34)[KCounting objects:  44% (15/34)[KCounting objects:  47% (16/34)[KCounting objects:  50% (17/34)[KCounting objects:  52% (18/34)[KCounting objects:  55% (19/34)[KCounting objects:  58% (20/34)[KCounting objects:  61% (21/34)[KCounting objects:  64% (22/34)[KCounting objects:  67% (23/34)[KCounting objects:  70% (24/34)[KCounting objects:  73% (25/34)[KCounting objects:  76% (26/34)[KCounting objects:  79% (27/34)[KCounting objects:  82% (28/34)[KCounting objects:  85% (29/34)[KCounting objects:  88% (30/34)[KCounting objects:  91% (31/34)[KCounting objects:  94% (32/34)[KCounting objects:  97% (33/34)[KCounting objects: 100% (34/34)[KCounting objects: 100% (34/34), done.
+Delta compression using up to 4 threads
+[KCompressing objects:   5% (1/17)[KCompressing objects:  11% (2/17)[KCompressing objects:  17% (3/17)[KCompressing objects:  23% (4/17)[KCompressing objects:  29% (5/17)[KCompressing objects:  35% (6/17)[KCompressing objects:  41% (7/17)[KCompressing objects:  47% (8/17)[KCompressing objects:  52% (9/17)[KCompressing objects:  58% (10/17)[KCompressing objects:  64% (11/17)[KCompressing objects:  70% (12/17)[KCompressing objects:  76% (13/17)[KCompressing objects:  82% (14/17)[KCompressing objects:  88% (15/17)[KCompressing objects:  94% (16/17)[KCompressing objects: 100% (17/17)[KCompressing objects: 100% (17/17), done.
+[KWriting objects:   5% (1/18)[KWriting objects:  11% (2/18)[KWriting objects:  16% (3/18)[KWriting objects:  22% (4/18)[KWriting objects:  27% (5/18)[KWriting objects:  33% (6/18)[KWriting objects:  38% (7/18)[KWriting objects:  44% (8/18)[KWriting objects:  50% (9/18)[KWriting objects:  55% (10/18)[KWriting objects:  61% (11/18)[KWriting objects:  66% (12/18)[KWriting objects:  72% (13/18)[KWriting objects:  77% (14/18)[KWriting objects:  83% (15/18)[KWriting objects:  88% (16/18)[KWriting objects:  94% (17/18)[KWriting objects: 100% (18/18)[KWriting objects: 100% (18/18), 236.19 KiB | 2.95 MiB/s, done.
+Total 18 (delta 11), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/11)[Kremote: Resolving deltas:   9% (1/11)[Kremote: Resolving deltas:  18% (2/11)[Kremote: Resolving deltas:  27% (3/11)[Kremote: Resolving deltas:  36% (4/11)[Kremote: Resolving deltas:  45% (5/11)[Kremote: Resolving deltas:  54% (6/11)[Kremote: Resolving deltas:  63% (7/11)[Kremote: Resolving deltas:  72% (8/11)[Kremote: Resolving deltas:  81% (9/11)[Kremote: Resolving deltas:  90% (10/11)[Kremote: Resolving deltas: 100% (11/11)[Kremote: Resolving deltas: 100% (11/11), completed with 11 local objects.[K
+To https://github.com/tiffany86225/website.git
+   dc46a81..79acea8  master -> master
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ [KTiffanys-MacBook-Pro:website Tiff$ blogdown:: serve_site()
+> 
+> blogdown::serve_site()
+bash: syntax error near unexpected token `blogdown::serve_site'
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ blogdown:: serve_site()
+> 
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ 

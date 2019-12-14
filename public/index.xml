@@ -6,10 +6,20 @@
     <description>Recent content on Tiffany Tung</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Sun, 02 Oct 2016 22:55:05 -0400</lastBuildDate>
+    <lastBuildDate>Fri, 13 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python</title>
+      <link>/blog/python/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/python/</guid>
+      <description>library(reticulate) The function below takes a string of nucleotides as input and returns a dictionary with all 3-mers present in that string, and the number of times that each 3-mer occurs. Then the function was used to find the 3-mers in the DNA sequence my_seq1 defined below.
+ my_seq1 = &amp;quot;ATCATCATG&amp;quot; my_seq2 = &amp;quot;CAGCCCAATCAGGCTCTACTGCCACTAAACTTACGCAGGATATATTTACGCCGACGTACT&amp;quot; result = {} for i in range(0, len(my_seq1)-2): mer = my_seq1[i:i+3] if mer in result: result[mer] += 1 else: result[mer] = 1 print(result) ## {&amp;#39;ATG&amp;#39;: 1, &amp;#39;CAT&amp;#39;: 2, &amp;#39;ATC&amp;#39;: 2, &amp;#39;TCA&amp;#39;: 2} result = {} for i in range(0, len(my_seq2)-2): mer = my_seq1[i:i+3] if mer in result: result[mer] += 1 else: result[mer] = 1 print(result) ## {&amp;#39;&amp;#39;: 49, &amp;#39;ATG&amp;#39;: 1, &amp;#39;ATC&amp;#39;: 2, &amp;#39;G&amp;#39;: 1, &amp;#39;CAT&amp;#39;: 2, &amp;#39;TG&amp;#39;: 1, &amp;#39;TCA&amp;#39;: 2} The function belowa takes FASTA file as input, opens that file, counts the number of sequences in the file (by counting the number of lines in the file that start with a “&amp;gt;” symbol), and returns the count.</description>
+    </item>
     
     <item>
       <title>Projects</title>
@@ -17,63 +27,50 @@
       <pubDate>Sun, 02 Oct 2016 22:55:05 -0400</pubDate>
       
       <guid>/projects/</guid>
-      <description></description>
+      <description>Projects Here are some projects I have been working on:
+  Project 1
+  Project 2
+  </description>
     </item>
     
     <item>
-      <title>Hello R Markdown</title>
-      <link>/blog/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <title>Project 1</title>
+      <link>/project1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/2015-07-23-r-rmarkdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>/project1/</guid>
+      <description>## ── Attaching packages ───────────────────────────────────────────────────────── tidyverse 1.3.0 ── ## ✓ ggplot2 3.2.1 ✓ purrr 0.3.3 ## ✓ tibble 2.1.3 ✓ dplyr 0.8.3 ## ✓ tidyr 1.0.0 ✓ stringr 1.4.0 ## ✓ readr 1.3.1 ✓ forcats 0.4.0 ## ── Conflicts ──────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## x dplyr::filter() masks stats::filter() ## x dplyr::lag() masks stats::lag() 0. Introduction I have chosen three datasets, the ‘visits’ dataset, ‘pop’ dataset and ‘gas_price’ dataset for this project.</description>
     </item>
     
     <item>
-      <title>Creating a New Theme</title>
-      <link>/blog/creating-a-new-theme/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <title>Project 2: Modeling, Testing, and Predicting</title>
+      <link>/project2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/creating-a-new-theme/</guid>
-      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&#39;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&#39;t cover using CSS to style your theme.
-We&#39;ll start with creating a new site with a very basic template.</description>
+      <guid>/project2/</guid>
+      <description>Modeling  Introduction The dataset ‘Salaries’ contains information on academic salary of assistant professors, associate professors and professors in a U.S. university. This dataset has 6 variables, 3 categorical and 3 numeric, with 397 observations. The variable ‘rank’ divides the ranks of professors into ‘AssocProf’, ‘AsstProf’ and ‘Prof’. The variable ‘discipline’ includes group ‘A’,“theorectical departemnts, and ‘B’,”applied departemnts&amp;quot;. Numeric variables, ‘yrs.since.phd’, ‘yrs.service’ and ‘salary’ illustrates years since PhD, years of service and salary in dollars, respectively.</description>
     </item>
     
     <item>
-      <title>(Hu)go Template Primer</title>
-      <link>/blog/goisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Projects.Rmd</title>
+      <link>/projects/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/goisforlovers/</guid>
-      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This document is a brief primer on using go templates.</description>
+      <guid>/projects/</guid>
+      <description>  Project 1
+ Project 2  </description>
     </item>
     
     <item>
-      <title>Getting Started with Hugo</title>
-      <link>/blog/hugoisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>resume</title>
+      <link>/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/blog/hugoisforlovers/</guid>
-      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
-    </item>
-    
-    <item>
-      <title>Migrate to Hugo from Jekyll</title>
-      <link>/blog/migrate-from-jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/blog/migrate-from-jekyll/</guid>
-      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
-▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&#39;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+      <guid>/resume/</guid>
+      <description>Tiffany Tung ============
+· I am a Fourth-year Biology student attending the University of Texas at Austin. My goal, upon completion of veterinary school, is to obtain a career in the veterinary field.
+  email: tiffany86225@gmail.com     Education  2016-2020 (expected) BSA, Biology; University of Texas at Austin (Austin, TX)    Interest -Veterinary medicine
+ Experience  2019:  MEDICAL INTERN / Austin Pets Alive-Neonatal Kitten Nursery / Austin, Texas</description>
     </item>
     
   </channel>
