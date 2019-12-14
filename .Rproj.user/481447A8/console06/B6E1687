@@ -575,3 +575,33 @@ remote: Resolving deltas:   0% (0/8)[Kremote: Resolving deltas:  12% (1/8)[K
 To https://github.com/tiffany86225/website.git
    f1ac729..84a70e3  master -> master
 ]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ [KTiffanys-MacBook-Pro:website Tiff$ git  add . 
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git  commit -m "some message"
+[master dc46a81] some message
+ Committer: Tiffany Tung <Tiff@Tiffanys-MacBook-Pro.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 14 files changed, 176 insertions(+), 12 deletions(-)
+ create mode 100644 .Rproj.user/481447A8/sources/prop/33E1DCE2
+ create mode 100644 .Rproj.user/481447A8/sources/s-5AA210D3/B52C440F-contents
+ create mode 100644 .Rproj.user/shared/notebooks/D5950EFD-resume/1/s/chunks.json
+ create mode 100644 content/resume.Rmd
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git  push origin master 
+[KEnumerating objects: 45, done.
+[KCounting objects:   2% (1/45)[KCounting objects:   4% (2/45)[KCounting objects:   6% (3/45)[KCounting objects:   8% (4/45)[KCounting objects:  11% (5/45)[KCounting objects:  13% (6/45)[KCounting objects:  15% (7/45)[KCounting objects:  17% (8/45)[KCounting objects:  20% (9/45)[KCounting objects:  22% (10/45)[KCounting objects:  24% (11/45)[KCounting objects:  26% (12/45)[KCounting objects:  28% (13/45)[KCounting objects:  31% (14/45)[KCounting objects:  33% (15/45)[KCounting objects:  35% (16/45)[KCounting objects:  37% (17/45)[KCounting objects:  40% (18/45)[KCounting objects:  42% (19/45)[KCounting objects:  44% (20/45)[KCounting objects:  46% (21/45)[KCounting objects:  48% (22/45)[KCounting objects:  51% (23/45)[KCounting objects:  53% (24/45)[KCounting objects:  55% (25/45)[KCounting objects:  57% (26/45)[KCounting objects:  60% (27/45)[KCounting objects:  62% (28/45)[KCounting objects:  64% (29/45)[KCounting objects:  66% (30/45)[KCounting objects:  68% (31/45)[KCounting objects:  71% (32/45)[KCounting objects:  73% (33/45)[KCounting objects:  75% (34/45)[KCounting objects:  77% (35/45)[KCounting objects:  80% (36/45)[KCounting objects:  82% (37/45)[KCounting objects:  84% (38/45)[KCounting objects:  86% (39/45)[KCounting objects:  88% (40/45)[KCounting objects:  91% (41/45)[KCounting objects:  93% (42/45)[KCounting objects:  95% (43/45)[KCounting objects:  97% (44/45)[KCounting objects: 100% (45/45)[KCounting objects: 100% (45/45), done.
+Delta compression using up to 4 threads
+[KCompressing objects:   4% (1/22)[KCompressing objects:   9% (2/22)[KCompressing objects:  13% (3/22)[KCompressing objects:  18% (4/22)[KCompressing objects:  22% (5/22)[KCompressing objects:  27% (6/22)[KCompressing objects:  31% (7/22)[KCompressing objects:  36% (8/22)[KCompressing objects:  40% (9/22)[KCompressing objects:  45% (10/22)[KCompressing objects:  50% (11/22)[KCompressing objects:  54% (12/22)[KCompressing objects:  59% (13/22)[KCompressing objects:  63% (14/22)[KCompressing objects:  68% (15/22)[KCompressing objects:  72% (16/22)[KCompressing objects:  77% (17/22)[KCompressing objects:  81% (18/22)[KCompressing objects:  86% (19/22)[KCompressing objects:  90% (20/22)[KCompressing objects:  95% (21/22)[KCompressing objects: 100% (22/22)[KCompressing objects: 100% (22/22), done.
+[KWriting objects:   3% (1/26)[KWriting objects:   7% (2/26)[KWriting objects:  11% (3/26)[KWriting objects:  15% (4/26)[KWriting objects:  19% (5/26)[KWriting objects:  23% (6/26)[KWriting objects:  26% (7/26)[KWriting objects:  30% (8/26)[KWriting objects:  34% (9/26)[KWriting objects:  38% (10/26)[KWriting objects:  42% (11/26)[KWriting objects:  46% (12/26)[KWriting objects:  50% (13/26)[KWriting objects:  53% (14/26)[KWriting objects:  57% (15/26)[KWriting objects:  61% (16/26)[KWriting objects:  65% (17/26)[KWriting objects:  69% (18/26)[KWriting objects:  73% (19/26)[KWriting objects:  76% (20/26)[KWriting objects:  80% (21/26)[KWriting objects:  84% (22/26)[KWriting objects:  88% (23/26)[KWriting objects:  92% (24/26)[KWriting objects:  96% (25/26)[KWriting objects: 100% (26/26)[KWriting objects: 100% (26/26), 3.34 KiB | 62.00 KiB/s, done.
+Total 26 (delta 11), reused 0 (delta 0)
+remote: Resolving deltas:   0% (0/11)[Kremote: Resolving deltas:   9% (1/11)[Kremote: Resolving deltas:  18% (2/11)[Kremote: Resolving deltas:  27% (3/11)[Kremote: Resolving deltas:  36% (4/11)[Kremote: Resolving deltas:  45% (5/11)[Kremote: Resolving deltas:  54% (6/11)[Kremote: Resolving deltas:  63% (7/11)[Kremote: Resolving deltas:  72% (8/11)[Kremote: Resolving deltas:  81% (9/11)[Kremote: Resolving deltas:  90% (10/11)[Kremote: Resolving deltas: 100% (11/11)[Kremote: Resolving deltas: 100% (11/11), completed with 11 local objects.[K
+To https://github.com/tiffany86225/website.git
+   84a70e3..dc46a81  master -> master
+]0;~/Desktop/websiteTiffanys-MacBook-Pro:website Tiff$ git  add . 
