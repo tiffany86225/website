@@ -1,0 +1,311 @@
+---
+title: 'Project 2: Modeling, Testing, and Predicting'
+author: "Tiffany Tung"
+date: "11/26/19"
+output:
+  html_document:
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+  pdf_document:
+    toc: yes
+  word_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+  # this hook is used only when the linewidth option is not NULL
+  if (!is.null(n <- options$linewidth)) {
+    x = knitr:::split_lines(x)
+    # any lines wider than n should be wrapped
+    if (any(nchar(x) > n)) x = strwrap(x, width = n)
+    x = paste(x, collapse = '\n')
+  }
+  hook_output(x, options)
+})
+
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE,fig.align="center",warning=FALSE,message=FALSE,fig.width=8, fig.height=5, linewidth=60)
+options(tibble.width = 100,width = 100)
+library(tidyverse)
+
+```
+
+# Modeling
+
+
+- #### Introduction 
+ The dataset 'Salaries' contains information on academic salary of assistant professors, associate professors and professors in a U.S. university. This dataset has 6 variables, 3 categorical and 3 numeric, with 397 observations. The variable 'rank' divides the ranks of professors into 'AssocProf', 'AsstProf' and 'Prof'. The variable 'discipline' includes group 'A',"theorectical departemnts, and 'B',"applied departemnts". Numeric variables, 'yrs.since.phd', 'yrs.service' and 'salary' illustrates years since PhD, years of service and salary in dollars, respectively. Lastly, the 'sex' variable includes 'female' and 'male. 
+
+#### MANOVA
+```{r}
+Salaries <- read_csv("Salaries.csv")
+man1<-manova(cbind(yrs.since.phd,yrs.service,salary)~sex, data=Salaries)
+summary(man1)
+summary.aov(man1)
+Salaries%>%group_by(sex)%>%summarize(mean(yrs.since.phd),mean(yrs.service),mean(salary))
+
+1-0.95^4
+0.05/4
+
+
+```
+
+*At least one of the numeric variables (yrs.since.phd,yrs.service or salary) show a mean difference across sex.*
+*Since the categorical variable only has 2 levels (Female & Male), post-hoc t test was not performend. A totalt 4 tests were performed (1 MANOVA + 3 ANOVA).*
+*The probability of at least type I error is 0.1855 and the bonferroni correction is 0.0125.*
+*A MANOVA was performed to determine the effect of sex on salary, years since phd and years of service. Significant differences were found among the two sexes on the three numveric variables. Pillai =0.03, pseudo F (3,395)= 4.36, p<0.01. Three ANOVA tests were performed. The univariate ANOVAs for all three numeric variables were also significant with the bonferroni correction, p<0.0125.*
+*MANOVA assumptions include random samples. multivariat normality, homogeneity, linearity, no outliers and no multicollinearity. Except for random samples, the rest of the assumptions are hard to test and meet and probably not all of them are met.*
+ 
+
+
+
+```{r}
+Salaries%>%group_by(sex)%>%
+  summarize(means=mean(salary))%>%
+  summarize(`mean_diff:`=diff(means))
+
+set.seed(348)
+rand_dist<-vector()
+
+for(i in 1:5000){
+newsal<-data.frame(salary=sample(Salaries$salary),sex=Salaries$sex) 
+rand_dist[i]<-mean(newsal[newsal$sex=="Female",]$salary)-
+              mean(newsal[newsal$sex=="Male",]$salary)}
+mean(rand_dist>14088.01)*2
+{hist(rand_dist,main="",ylab=""); abline(v =-14088.01,col="red");abline(v = 14088.01,col="red")}
+
+```
+*H0: The mean salary is the same for female vs. male professors.*
+
+*HA: The mean salary is different for female vs. male professors.*
+
+*The randomination test yields a p value of 0.008 which shows that the mean salary is different for female vs. male professors. (p value<0.05).*
+
+
+#### Linear Regression Model
+
+```{r}
+Salaries$service_c <-Salaries$yrs.service- mean(Salaries$yrs.service)
+fit<-lm(salary ~sex*service_c, data=Salaries)
+summary(fit)
+```
+
+*Salary = 110908.9+3716.5sex+1637.3service-931.7(sex:service)*
+
+*Female=0. Salary = 110908.9+1637.3service*
+*For female professors, a 1 year increase in years of service corresponds to a $112546.2 increase in salary.*
+
+*Male=1. Salary = 110908.9+3716.5+1637.3service-931.7service*
+*For male professors, a 1 year increase in years of service corresponds to a $115331 increase in salary.*
+
+*For 1 year of service, salary for male professors is $2784.8 higher than female professors.*
+
+```{r, echo = FALSE}
+#Regression plot
+fit<-lm(salary ~sex*yrs.service, data=Salaries)
+newdat<-Salaries
+newdat$yrs.service<-c(seq(0,60,length.out=396),mean(Salaries$service_c))
+newdat$sex<-rep("Female",length(newdat$sex))
+newdat$pred1<-predict(fit,newdat)
+newdat$sex<-rep("Male",length(newdat$sex))
+newdat$pred2<-predict(fit,newdat)
+
+ggplot(Salaries, aes(x = yrs.service, y = salary)) +
+    geom_point() + geom_line(data = newdat, aes(y = pred1),color='blue' ) +
+    geom_line(data = newdat, aes(y = pred2),color='red')+ggtitle("Regression plot")
+```
+
+
+
+```{r}
+#Assumptions
+library(ggplot2)
+resids<-fit$residuals
+
+fitvals<-fit$fitted.values
+ggplot()+geom_point(aes(fitvals,resids))+geom_hline(yintercept=0, col="red")+ ggtitle("Linearity")
+ggplot()+geom_histogram(aes(resids),bins=20)+ggtitle("Normality")
+ggplot()+geom_qq(aes(sample=resids))+geom_qq_line(aes(sample=resids), color='red')+ggtitle("Normality")
+```
+
+*The points look somewhat fanned out. Homoskedsaticity is probably not met.*
+*Normality is moderate.*
+
+```{r}
+
+library(sandwich)
+library(lmtest)
+summary(fit)$coef[,1:2]
+coeftest(fit, vcov = vcovHC(fit))[,1:2]
+
+```
+
+*Compared to the original SEs, the robust SEs are significantly lower. This suggests that the original SEs were good enough. *
+
+*The proportion of the variation in the outcome this model explains is 0.1266.*
+
+
+
+#### Bootstrapped Standard Errors
+```{r}
+samp_distn<-replicate(5000, {
+  boot_dat<-Salaries[sample(nrow(Salaries),replace=TRUE),]
+  fit<-lm(salary~sex*service_c,data=boot_dat)
+  coef(fit)
+})
+samp_distn%>%t%>%as.data.frame%>%summarize_all(sd)
+coeftest(fit)[,1:2]
+coeftest(fit, vcov=vcovHC(fit))[,1:2]
+```
+
+*The bootstrapped SEs are lower than the originial SEs but still higher than the robust SEs.*
+
+
+#### Logistic Regression
+```{r}
+Sal <- Salaries %>% mutate(y = ifelse(sex =="Male",1,0))%>%select(-X1,-service_c,-sex)
+fit1<-glm(y~salary+yrs.service,data=Sal,family="binomial")
+coeftest(fit1)
+exp(coeftest(fit1))
+```
+
+*Controlling for years of service, for every 1 dollar increase in salary, odds of sex change by a factor of 1.*
+*Controlling for salary, for every 1 year increase in years of service, odds of sex change by a factor of 1.036.*
+
+```{r}
+
+#Confusion matrix
+prob<-predict(fit1,type="response")
+pred<-ifelse(prob>.5,1,0)
+table(truth=Sal$y,prediction=pred)%>%addmargins
+
+class_diag<-function(probs,truth){
+  
+  tab<-table(factor(probs>.5,levels=c("FALSE","TRUE")),truth)
+  acc=sum(diag(tab))/sum(tab)
+  sens=tab[2,2]/colSums(tab)[2]
+  spec=tab[1,1]/colSums(tab)[1]
+  ppv=tab[2,2]/rowSums(tab)[2]
+
+  if(is.numeric(truth)==FALSE & is.logical(truth)==FALSE) truth<-as.numeric(truth)-1
+  
+  #CALCULATE EXACT AUC
+  ord<-order(probs, decreasing=TRUE)
+  probs <- probs[ord]
+  truth <- truth[ord]
+ 
+  TPR=cumsum(truth)/max(1,sum(truth)) 
+  FPR=cumsum(!truth)/max(1,sum(!truth))
+  
+  dup<-c(probs[-1]>=probs[-length(probs)], FALSE)
+  TPR<-c(0,TPR[!dup],1)
+  FPR<-c(0,FPR[!dup],1)
+  
+  n <- length(TPR)
+  auc<- sum( ((TPR[-1]+TPR[-n])/2) * (FPR[-1]-FPR[-n]) )
+
+  data.frame(acc,sens,spec,ppv,auc)
+}
+class_diag(prob,Sal$y)
+
+
+```
+
+*The accuracy is 0.9, TPR, porpotion of male correctly classified, is 1, TNR, porportion of female correctly classified, is 0 and PPV is 0.9.*
+
+```{r, echo = FALSE}
+#Density plot
+Sal$y<-as.factor(Sal$y)
+Sal$logit<-predict(fit1,type="link")
+Sal%>%ggplot()+geom_density(aes(logit,color=y,fill=y), alpha=.4)+
+  theme(legend.position=c(.85,.85))+geom_vline(xintercept=0)+xlab("predictor (logit)")+ggtitle("Density Plot")
+```
+
+```{r}
+
+#ROC plot & AUC
+Sal1 <- Sal %>% select(-logit)
+library(plotROC)
+ROCplot<-ggplot(Sal)+geom_roc(aes(d=y,m=prob), n.cuts=0)+  geom_segment(aes(x=0,xend=1,y=0,yend=1),lty=2)
+
+ROCplot
+library(pROC)
+auc(Sal$y,prob)
+
+```
+*AUC is 0.68 which is poor. The probability that a random person thats male has a higher prediction than a random selected person who is female.*
+
+```{r}
+#10-fold CV
+set.seed(1234)
+k=10 
+data1<-Sal1[sample(nrow(Sal1)),] 
+folds<-cut(seq(1:nrow(Sal1)),breaks=k,labels=F)
+diags<-NULL
+for(i in 1:k){
+  train<-data1[folds!=i,] 
+  test<-data1[folds==i,]
+  truth<-test$y
+  
+  fit<-glm(y~salary+yrs.service,data=train,family="binomial")
+  probs<-predict(fit,newdata = test,type="response")
+  diags<-rbind(diags,class_diag(probs,truth))
+}
+
+apply(diags,2,mean) 
+
+
+```
+
+*The 10-fold CV gives a accuracy of 0.9, sensitivity of 1, recall of 0.9 and auc of 0.7. There's no significant change with accuracy nor recall but the auc increased by about 0.03 *
+
+
+#### Lasso
+```{r}
+library(glmnet)
+fit2<-glm(y~.-1, data = Sal1, family = "binomial")
+
+set.seed(1234)
+x<-model.matrix(fit2)
+x<-scale(x)
+y<-as.matrix(Sal$y)
+cv<-cv.glmnet(x,y,family='binomial') 
+lasso<-glmnet(x,y,family='binomial',lambda=cv$lambda.1se)
+coef(lasso)
+
+
+set.seed(1234)
+k=10 
+data1<-Sal1[sample(nrow(Sal1)),] 
+folds<-cut(seq(1:nrow(Sal1)),breaks=k,labels=F)
+diags<-NULL
+for(i in 1:k){
+ train<-data1[folds!=i,] 
+  test<-data1[folds==i,]
+  truth<-test$y
+  
+  fit<-glm(y~.,data=train,family="binomial")
+  probs<-predict(fit,newdata = test,type="response")
+  diags<-rbind(diags,class_diag(probs,truth))
+}
+
+apply(diags,2,mean) 
+```
+
+*None of the variables are lasso significant.*
+
+*I still included the code for the 10-fold CV on this model to fullfil the requiremnt of this question but since there's no lasso significant varibale I ran it with all the variables.*
+
+*Since none of the variables are lasso significant, accuracy comparison cannot be made. The best accuracy for this model is the accuracy from the logistic regression (0.9). *
+
+
+...
+
+
+
+
+

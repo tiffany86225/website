@@ -1,0 +1,133 @@
+---
+title: "Project 1"
+author: "Tiffany Tung"
+date: "10/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = FALSE}
+
+library(tidyverse)
+library(dplyr)
+
+visits <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-09-17/national_parks.csv")
+pop <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-09-17/state_pop.csv")
+gas_price <- read.csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-09-17/gas_price.csv")
+```
+
+#### 0. Introduction 
+
+*I have chosen three datasets, the 'visits' dataset, 'pop' dataset and 'gas_price' dataset for this project. The'visits'dataset includes visitation numbers to all National Parks in the US by year. I have decieded to remove a few variables relating to geological boundary lines since these will not be useful for the purpose of this project. A few important variables incldue the 'year', 'state', park full name ('unit_name'), types of national park('unit_name'), number of visistors for each park ('visitors'). The 'pop' dataset contains state population recorded on January 1st of each year. The 'gas_price' dataset contains US gas price from 1929 to 2015 and variables include the 'year', 'state', and 'population'. The gas_price dataset contains gas prices from 1929 to 2015. Variables include the 'year', true gas price in each year ('gas_current') and gas price calculated to standard price in 2015 ('gas_constant'), which accounts for inflation over the years.*
+
+*I personally really enjoyed traveling to different states and exploring different national parks. I thought it would be interesting to use summary statistics to make some intersting  observations on these datasets. I'm wondering whether there is an association between gas price and the number of visitors in each year. *
+
+
+#### 1. Tidying: Spread/Gather 
+
+```{r}
+untidy_pop<- pop%>%pivot_wider(names_from="state", values_from="pop")
+new_tidy <-untidy_pop%>% pivot_longer(2:52,names_to="state", values_to="pop")
+
+#My data is already very tidy and just to make sure I didn't mess up my data I did not use these data for the rest of the project
+
+```
+
+*I first used pivot_wider to untidy the data by separating the categorical variable geometry in to POLYGON and MILTIPOLYGON. I then retidying them back in to one variable with pivot_longer.*
+
+    
+#### 2. Joining/Merging 
+```{r}
+new <- visits %>% mutate(year_int= as.integer(as.character(visits$year)))  
+new <- new %>% select(-year)
+new<- new %>% rename("year"=year_int)
+national_new <- inner_join(new,pop)
+national_new <- inner_join(national_new,gas_price)
+national_new <-national_new%>% select(-metadata,-number_of_records,-gnis_id,-geometry)
+21560-20048
+```
+
+*First, I had to mutate a new year column (year_int) with year values as integers since the original 'year' in the "visits"" data set was considered as factors and R had trouble joining. Then, I performed inner join by year with national park visits ('new'), state population ('pop') and gas price. I did this because I wanted to be able to compare the gas price, visitors and state population in each year for the later part of the project. There were 21,560 cases in the original 'visits' dataset and 1512 cases were dropped after joining. *
+
+#### 3. Wrangling 
+
+```{r}
+national_new<-national_new %>% group_by(year,state)%>%mutate(visitors_to_pop=visitors/pop)
+glimpse(national_new%>%group_by(unit_name)%>%filter(unit_type=="National Park")%>%
+  summarize(total_vis=sum(visitors))%>%
+  arrange(desc(total_vis)))
+
+
+glimpse(national_new%>%group_by(state)%>%summarize(mean_vispop=mean(visitors_to_pop))%>%arrange(mean_vispop))
+
+
+glimpse(national_new %>%group_by(state)%>%filter(unit_type=="National Park")%>%summarize(number_of_NP=n_distinct(unit_name))%>% arrange(desc(number_of_NP)))
+
+glimpse(national_new %>% group_by(state)%>% summarize(mean_vis=mean(visitors),sd_vis=sd(visitors),min_vis=min(visitors),max_vis=max(visitors), n_distinct(unit_name))%>%arrange(mean_vis)
+)
+
+
+glimpse(national_new %>% group_by(state)%>% summarize(mean_pop=mean(pop,na.rm=T),sd_pop=sd(pop,na.rm=T)) %>% arrange(mean_pop))
+
+glimpse(national_new %>% group_by(year,state)%>% summarize(mean_vis=mean(visitors),sd_vis=sd(visitors))%>%arrange(mean_vis))
+
+
+glimpse(national_new%>%group_by(year)%>%summarize(sum_vis=sum(visitors), mean(gas_constant))%>% arrange(sum_vis))
+
+
+```
+
+*I mutated a new column called visitor_to_pop by dividing 'visitors' by 'pop' to get the porportion of populatoin that visited the Parks by state. The most popular National Park over the years is Great Smoky Mountains National Park and the least popular is Kobuk Valley National Park, with a total of 510634272 and 141155 visitors. Connecticut has the least visitors and Nevada has the most. Arkansas and California have the most number of all National Parks. Nevada has the highest mean visitors and Connecticut has the least. California has the highest mean population and Wyoming has the lowest. Florida has the highest mean = visitors in 1951. The year 1929 has the least total number of visitors and 2015 has the most.*
+
+
+#### 4. Visualizing 
+
+```{r, echo = FALSE}
+
+ggplot(national_new, aes(x = year, y = visitors))+
+   geom_bar(stat="summary",fun.y="mean", position="dodge",color="blue", fill="white")+
+    geom_errorbar(stat="summary",fun.data='mean_se', width=0.5, position="dodge")+
+  ggtitle("Annual Natoinal Parks Visitation over the Years") +
+  scale_x_continuous(name= "Year", breaks = seq(1925, 2015, 10))+
+  scale_y_continuous(name= "Avg Visitors", breaks = seq(0, 1000000, 100000))
+
+```
+
+*There was a slow increase in the average visitors since around 1925 and a drastic decrease around 1940s. This decrease is most likely due to WWII. After this time period there is a significant increase in the average visitors untill 1970s. This significant drop is probably due to the Vietnam War. Average visistors reached a highest point around 1985 and decrease over the next few decades.*
+
+```{r, echo = FALSE}
+
+ national_new%>%group_by(year)%>%summarize(total_vis=sum(visitors), avg_gas=mean(gas_constant))%>%
+  ggplot(aes(year,total_vis))+
+geom_point(size=1,aes(color=avg_gas))+
+    ggtitle("Annual Visit Trend with Gas Price") +
+  scale_color_gradient(low="yellow", high="red")+  scale_x_continuous(name= "Year", breaks = seq(1925, 2015, 10))+
+  scale_y_continuous(name= "Avg Visitors")
+
+```
+
+
+*The average gas price is on the chepaer end from 1945 to 1975 and the average visitors happened to also increase during that time period. However, this does not a suggest coorelation between the two variables. Average gas price increased around 1980s and so is the average visitors. This is probably due to more parks opening around that time period.*
+
+    
+#### 5. Dimensionality Reduction 
+```{r}
+parks_pop <- inner_join(new,pop)
+parks_pop<- inner_join(parks_pop,gas_price)
+parks_pop <-parks_pop %>% select(year,visitors,gas_current,gas_constant)%>%cor
+parks <- parks_pop %>%scale%>%prcomp()
+
+
+parks$rotation[,1:2]%>%as.data.frame%>%rownames_to_column%>%
+  ggplot()+geom_hline(aes(yintercept=0),lty=2)+
+  geom_vline(aes(xintercept=0),lty=2)+ylab("PC2")+xlab("PC1")+
+  geom_segment(aes(x=0,y=0,xend=PC1,yend=PC2),arrow=arrow(),col="red")+
+  geom_label(aes(x=PC1*1.1,y=PC2*1.1,label=rowname))
+
+```
+
+
+*The gas_constant, gas_current and year are all pointing to the left while visistors is pointing to the right. This PCA shows that there is no correlation between visitors and the rest of the variables.*
