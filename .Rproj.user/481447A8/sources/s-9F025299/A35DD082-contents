@@ -1,0 +1,10 @@
+---
+title: "Projects.Rmd"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+- [Project 1](/Project1)  and - [Project 2](/Project2)
