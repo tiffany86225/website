@@ -1,0 +1,65 @@
+---
+title: "resume"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tiffany Tung
+
+============
+
+· I am a Fourth-year Biology student attending the University of
+Texas at Austin. My goal, upon completion of veterinary school, is
+to obtain a career in the veterinary field.
+
+-------------------     ----------------------------
+email                        tiffany86225@gmail.com
+-------------------     ----------------------------
+
+Education
+---------
+
+2016-2020 (expected)
+:   **BSA, Biology**; University of Texas at Austin (Austin, TX)
+
+Interest 
+----------
+
+-Veterinary medicine 
+
+Experience
+----------
+
+- 2019:
+
+MEDICAL INTERN / Austin Pets Alive-Neonatal Kitten Nursery / Austin, Texas
+
+**Administer oral and subcutaneous medications**
+
+**Track kittens’ weights daily to ensure they are gaining weight and thriving**
+
+- Summer 2018:
+SHADOWEE / Grand Westheimer Animal Hospital / Katy, Texas
+
+**Assisted Veterinary Technician with daily tasks in a clinical setting**
+**Helped restraining and comforting patients during examination**
+
+Skills 
+----------
+- Medical Terminology
+- Time Management
+- Leadership
+
+
+Accomplishments
+----------
+- University Honors
+UT Austin / Fall 2016-2019
+
+- *President* of Taiwanese
+International Student Association
+UT Austin / 2019-2020
+--------------------------------
