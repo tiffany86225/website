@@ -1,0 +1,6 @@
+"0","#Assumptions"
+"0","library(ggplot2)"
+"0","resids<-fit$residuals"
+"0",""
+"0","fitvals<-fit$fitted.values"
+"0","ggplot()+geom_point(aes(fitvals,resids))+geom_hline(yintercept=0, col=""red"")+ ggtitle(""Linearity"")"

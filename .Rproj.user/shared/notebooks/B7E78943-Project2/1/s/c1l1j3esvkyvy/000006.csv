@@ -1,0 +1,1 @@
+"0","ggplot()+geom_qq(aes(sample=resids))+geom_qq_line(aes(sample=resids), color='red')+ggtitle(""Normality"")"

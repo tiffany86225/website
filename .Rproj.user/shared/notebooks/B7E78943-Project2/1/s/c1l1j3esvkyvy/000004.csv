@@ -1,0 +1,1 @@
+"0","ggplot()+geom_histogram(aes(resids),bins=20)+ggtitle(""Normality"")"

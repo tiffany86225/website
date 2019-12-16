@@ -1,0 +1,7 @@
+"0",""
+"0","#ROC plot & AUC"
+"0","Sal1 <- Sal %>% select(-logit)"
+"0","library(plotROC)"
+"0","ROCplot<-ggplot(Sal)+geom_roc(aes(d=y,m=prob), n.cuts=0)+  geom_segment(aes(x=0,xend=1,y=0,yend=1),lty=2)"
+"0",""
+"0","ROCplot"

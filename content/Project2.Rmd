@@ -267,6 +267,35 @@ apply(diags,2,mean)
 #### Lasso
 ```{r}
 
+library(glmnet)
+fit2<-glm(y~.-1, data = Sal1, family = "binomial")
+
+set.seed(1234)
+x<-model.matrix(fit2)
+x<-scale(x)
+y<-as.matrix(Sal$y)
+cv<-cv.glmnet(x,y,family='binomial') 
+lasso<-glmnet(x,y,family='binomial',lambda=cv$lambda.1se)
+coef(lasso)
+
+
+set.seed(1234)
+k=10 
+data1<-Sal1[sample(nrow(Sal1)),] 
+folds<-cut(seq(1:nrow(Sal1)),breaks=k,labels=F)
+diags<-NULL
+for(i in 1:k){
+ train<-data1[folds!=i,] 
+  test<-data1[folds==i,]
+  truth<-test$y
+  
+  fit<-glm(y~.,data=train,family="binomial")
+  probs<-predict(fit,newdata = test,type="response")
+  diags<-rbind(diags,class_diag(probs,truth))
+}
+
+apply(diags,2,mean)
+
 ```
 
 *None of the variables are lasso significant.*

@@ -338,6 +338,44 @@ apply(diags,2,mean) </code></pre>
 </div>
 <div id="lasso" class="section level4">
 <h4>Lasso</h4>
+<pre class="r"><code>library(glmnet)
+fit2&lt;-glm(y~.-1, data = Sal1, family = &quot;binomial&quot;)
+
+set.seed(1234)
+x&lt;-model.matrix(fit2)
+x&lt;-scale(x)
+y&lt;-as.matrix(Sal$y)
+cv&lt;-cv.glmnet(x,y,family=&#39;binomial&#39;) 
+lasso&lt;-glmnet(x,y,family=&#39;binomial&#39;,lambda=cv$lambda.1se)
+coef(lasso)</code></pre>
+<pre><code>## 8 x 1 sparse Matrix of class &quot;dgCMatrix&quot;
+##                     s0
+## (Intercept)   2.216971
+## rankAssocProf 0.000000
+## rankAsstProf  .       
+## rankProf      .       
+## disciplineB   .       
+## yrs.since.phd .       
+## yrs.service   .       
+## salary        .</code></pre>
+<pre class="r"><code>set.seed(1234)
+k=10 
+data1&lt;-Sal1[sample(nrow(Sal1)),] 
+folds&lt;-cut(seq(1:nrow(Sal1)),breaks=k,labels=F)
+diags&lt;-NULL
+for(i in 1:k){
+ train&lt;-data1[folds!=i,] 
+  test&lt;-data1[folds==i,]
+  truth&lt;-test$y
+  
+  fit&lt;-glm(y~.,data=train,family=&quot;binomial&quot;)
+  probs&lt;-predict(fit,newdata = test,type=&quot;response&quot;)
+  diags&lt;-rbind(diags,class_diag(probs,truth))
+}
+
+apply(diags,2,mean)</code></pre>
+<pre><code>##       acc      sens      spec       ppv       auc 
+## 0.9016667 1.0000000 0.0000000 0.9016667 0.6500896</code></pre>
 <p><em>None of the variables are lasso significant.</em></p>
 <p><em>I still included the code for the 10-fold CV on this model to fullfil the requiremnt of this question but since there’s no lasso significant varibale I ran it with all the variables.</em></p>
 <p><em>Since none of the variables are lasso significant, accuracy comparison cannot be made. The best accuracy for this model is the accuracy from the logistic regression (0.9). </em></p>
